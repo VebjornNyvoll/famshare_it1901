@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 
 public class FamController {
 
-    private Calendar calendar;
+    /* private Calendar calendar;
 
     public FamController(Calendar calendar) {
         this.calendar = calendar;
@@ -15,6 +15,6 @@ public class FamController {
             return true;
         }
         return false;
-    }
+    } */
 
 }
