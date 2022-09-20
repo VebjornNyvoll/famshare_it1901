@@ -14,12 +14,12 @@
       <TextField fx:id="username" layoutX="333.0" layoutY="274.0" prefHeight="25.0" prefWidth="197.0" />
       <Text layoutX="333.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
       <Text layoutX="335.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" />
-      <Button layoutX="333.0" layoutY="377.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="BOOK" />
       <TextField fx:id="item" layoutX="334.0" layoutY="165.0" prefHeight="25.0" prefWidth="195.0" />
       <Text layoutX="334.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item" />
       <DatePicker fx:id="endDate" layoutX="433.0" layoutY="334.0" prefHeight="25.0" prefWidth="95.0" />
       <Text layoutX="433.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" />
       <TextField fx:id="description" layoutX="333.0" layoutY="218.0" prefHeight="25.0" prefWidth="195.0" />
       <Text layoutX="333.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
+      <Button layoutX="335.0" layoutY="390.0" onAction="#book" text="Book" />
    </children>
 </Pane>

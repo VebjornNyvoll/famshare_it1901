@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -30,19 +32,22 @@ public class FamController {
     @FXML
     private TextField item, username, description;
 
-    public void book() {
-        Item bookedObject = new Item();
-        bookedObject.setName(item.getText());
-        bookedObject.setDecsripion(description.getText());
-        bookedObject.setID(idList.get(idIndex));
+    @FXML
+    void book() {
+        System.out.println("test");
+        // Item bookedObject = new Item();
+        // bookedObject.setName(item.getText());
+        // bookedObject.setDecsripion(description.getText());
+        // bookedObject.setID(idList.get(idIndex));
 
-        User user = new User();
-        user.setName(username.getText());
-        user.addItem(idList.get(idIndex));
+        // User user = new User();
+        // user.setName(username.getText());
+        // user.addItem(idList.get(idIndex));
 
-        Booking newBooking = new Booking(bookedObject, user, startDate.getValue(), endDate.getValue());
+        // Booking newBooking = new Booking(bookedObject, user, startDate.getValue(),
+        // endDate.getValue());
 
-        isAvailable(newBooking);
+        // isAvailable(newBooking);
     }
 
     public boolean isAvailable(Booking newBooking) {
