@@ -30,8 +30,7 @@ public class FamController {
     @FXML
     private TextField item, username, description;
 
-    public boolean isAvailable() {
-
+    public void book() {
         Item bookedObject = new Item();
         bookedObject.setName(item.getText());
         bookedObject.setDecsripion(description.getText());
@@ -43,6 +42,10 @@ public class FamController {
 
         Booking newBooking = new Booking(bookedObject, user, startDate.getValue(), endDate.getValue());
 
+        isAvailable(newBooking);
+    }
+
+    public boolean isAvailable(Booking newBooking) {
         if (calendar.isAvailable(newBooking)) {
             // setter inn i lista etter ID-indeks, bare en midlertidig løsning
             bookings.getItems().set(idIndex, newBooking.toString());

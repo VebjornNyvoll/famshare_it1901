@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="famshare/src/main/resources/gr2260/famshare/app/famshare.fxml">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ListView fx:id="bookings" layoutX="14.0" layoutY="99.0" prefHeight="303.0" prefWidth="266.0" />
       <DatePicker fx:id="startDate" layoutX="333.0" layoutY="334.0" prefHeight="25.0" prefWidth="95.0" />
