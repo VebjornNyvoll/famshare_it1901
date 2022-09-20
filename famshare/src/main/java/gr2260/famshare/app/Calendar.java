@@ -21,7 +21,11 @@ public class Calendar {
             throw new IllegalStateException("Cannot add booking as one or more of the dates are unavailable.");
         }
     }
-    
+
+    public ArrayList<Booking> getBookings(){
+        return new ArrayList<Booking>(bookings);
+    }
+
     public boolean isAvailable(Booking newBooking){
         if(newBooking.getAllDates() == null){
             throw new NullPointerException("New booking is null");
