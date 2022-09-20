@@ -92,7 +92,6 @@
               <mainClass>gr2260.famshare.app.App</mainClass>
           </configuration>
         </plugin>
-        
       </plugins>
     </pluginManagement>
   </build>
