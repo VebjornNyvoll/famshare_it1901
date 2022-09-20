@@ -12,13 +12,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 public class FamController {
-
-    private Calendar calendar;
+    public Calendar calendar;
     private List<Integer> idList;
     private int idIndex;
 
-    public FamController(Calendar calendar) {
-        this.calendar = calendar;
+    public FamController() {
+        // this.calendar = calendar;
         idList = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         idIndex = 0;
     }
