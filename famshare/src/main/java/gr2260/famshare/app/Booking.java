@@ -17,6 +17,13 @@ public class Booking {
     public Booking() {
     }
 
+    // Temporary constructor for testing purposes
+    public Booking(Item bookedObject, User booker, LocalDate startDate, LocalDate endDate) {
+        setBookedObject(bookedObject);
+        setBooker(booker);
+        setDates(startDate, endDate);
+    }
+
     // Sets start and end dates and fills allDates list with all dates between start and end date.
     public void setDates(LocalDate startDate, LocalDate endDate){
         setStartDate(startDate);
@@ -55,19 +62,19 @@ public class Booking {
     }
 
     public Item getBookedObject() {
-        return bookedObject;
+        return this.bookedObject;
     }
 
     public User getBooker() {
-        return booker;
+        return this.booker;
     }
 
     public LocalDate getStartDate() {
-        return startDate;
+        return LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth());
     }
 
     public LocalDate getEndDate() {
-        return endDate;
+        return LocalDate.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth());
     }
 
     public List<LocalDate> getAllDates() {
