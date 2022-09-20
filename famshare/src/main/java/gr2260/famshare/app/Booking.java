@@ -12,16 +12,18 @@ public class Booking {
     private User booker;
     private LocalDate startDate;
     private LocalDate endDate;
+    private int bookingId;
     private List<LocalDate> allDates;
 
     public Booking() {
     }
 
     // Temporary constructor for testing purposes
-    public Booking(Item bookedObject, User booker, LocalDate startDate, LocalDate endDate) {
+    public Booking(Item bookedObject, User booker, LocalDate startDate, LocalDate endDate, int bookingId) {
         setBookedObject(bookedObject);
         setBooker(booker);
         setDates(startDate, endDate);
+        setBookingId(bookingId);
     }
 
     // Sets start and end dates and fills allDates list with all dates between start and end date.
@@ -30,6 +32,14 @@ public class Booking {
         setEndDate(endDate);
         Stream<LocalDate> dates = startDate.datesUntil(endDate.plusDays(1));
         this.allDates = dates.collect(Collectors.<LocalDate>toList());
+    }
+
+    public void setBookingId(int id){
+        this.bookingId = id;
+    }
+
+    public int getBookingId(){
+        return this.bookingId;
     }
 
     public void setBookedObject(Item bookedObject) {
