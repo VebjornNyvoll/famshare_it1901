@@ -11,15 +11,16 @@
    <children>
       <ListView fx:id="bookings" layoutX="14.0" layoutY="99.0" prefHeight="303.0" prefWidth="266.0" />
       <DatePicker fx:id="startDate" layoutX="333.0" layoutY="334.0" prefHeight="25.0" prefWidth="95.0" />
-      <TextField fx:id="username" layoutX="333.0" layoutY="274.0" prefHeight="25.0" prefWidth="197.0" />
-      <Text layoutX="333.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
       <Text layoutX="335.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" />
-      <TextField fx:id="item" layoutX="334.0" layoutY="165.0" prefHeight="25.0" prefWidth="195.0" />
-      <Text layoutX="334.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item" />
+      <Text layoutX="324.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items" />
       <DatePicker fx:id="endDate" layoutX="433.0" layoutY="334.0" prefHeight="25.0" prefWidth="95.0" />
       <Text layoutX="433.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" />
-      <TextField fx:id="description" layoutX="333.0" layoutY="218.0" prefHeight="25.0" prefWidth="195.0" />
-      <Text layoutX="333.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
-      <Button layoutX="335.0" layoutY="390.0" onAction="#book" text="Book" />
+      <TextField fx:id="description" layoutX="331.0" layoutY="292.0" prefHeight="25.0" prefWidth="195.0" />
+      <Text layoutX="331.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
+      <Button layoutX="337.0" layoutY="377.0" onAction="#book" prefHeight="25.0" prefWidth="88.0" text="Book" />
+      <ListView fx:id="items" layoutX="324.0" layoutY="99.0" prefHeight="170.0" prefWidth="266.0" />
+      <Text layoutX="14.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bookings" />
+      <Text fx:id="exception" layoutX="334.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="252.22900390625" />
+      <Button layoutX="434.0" layoutY="377.0" onAction="#loadItems" prefHeight="25.0" prefWidth="95.0" text="Load items" />
    </children>
 </Pane>
