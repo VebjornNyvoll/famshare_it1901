@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2260.famshare.app.FamController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="581.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2260.famshare.app.FamController">
    <children>
       <ListView fx:id="bookingView" layoutX="14.0" layoutY="99.0" prefHeight="303.0" prefWidth="303.0" />
       <DatePicker fx:id="startDate" layoutX="340.0" layoutY="335.0" prefHeight="25.0" prefWidth="101.0" />
@@ -23,10 +26,18 @@
       <Text layoutX="14.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bookings" />
       <Text fx:id="exceptionText" layoutX="339.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="226.05120849609375" />
       <Button layoutX="457.0" layoutY="378.0" onAction="#loadItems" prefHeight="25.0" prefWidth="92.0" text="Load items" />
-      <Text layoutX="16.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Family share">
+      <Text layoutX="14.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Family share">
          <font>
             <Font size="30.0" />
          </font>
       </Text>
+      <ImageView fitHeight="79.0" fitWidth="421.0" layoutX="393.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@famshare.png" />
+         </image>
+      </ImageView>
    </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
 </Pane>
