@@ -1,5 +1,6 @@
 package gr2260.famshare.app;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,10 +61,16 @@ public class FamController {
     }
 
     @FXML
-    void initialize() {
+    void initialize() throws FileNotFoundException {
         setDummyItems();
         updateItemView();
+        List<Booking> bookings = rw.loadBookings();
+        for (Booking b : bookings) {
+            calendar.addBooking(b);
+        }
         updateBookingView();
+        //Reads from file and adds bookings to calendar
+        
     }
 
     public void updateItemView() {
