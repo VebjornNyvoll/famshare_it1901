@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class UserTest {
 
-  User usr = null;
+  private User usr = null;
 
   @Before
   public void init() {
