@@ -18,6 +18,7 @@ public class FamController {
 
     private Calendar calendar;
     private List<Item> itemObjectList;
+    private List<Booking> bookingObjectList;
     private List<Integer> idList;
     private int idIndex;
     private User dummyUser = new User();
@@ -25,7 +26,8 @@ public class FamController {
     public FamController() {
         idList = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
         idIndex = 0;
-
+        bookingObjectList = new ArrayList<>();
+        itemObjectList = new ArrayList<>();
     }
 
     // void initialize(URL location, ResourceBundle resources) {
@@ -44,7 +46,7 @@ public class FamController {
     @FXML
     private TextField description;
 
-    public void setItems() {
+    public void setDummyItems() {
 
         Item cabin = new Item();
         cabin.setName("cabin");
@@ -57,24 +59,26 @@ public class FamController {
         boat.setID(3);
 
         itemObjectList = new ArrayList<>(Arrays.asList(cabin, car, boat));
-        for (int i = 0; i < itemObjectList.size(); i++) {
-            items.getItems().add(i, itemObjectList.get(i).getName());
-        }
-        System.out.println(itemObjectList.size());
+
     }
 
     public void updateItemList() {
         items.getItems().clear();
-        setItems();
+        for (int i = 0; i < itemObjectList.size(); i++) {
+            items.getItems().add(i, itemObjectList.get(i).getName());
+        }
     }
 
     public void updateBookingList() {
         bookings.getItems().clear();
-
+        for (Booking booking : bookingObjectList) {
+            bookings.getItems().add(booking.toString());
+        }
     }
 
     @FXML
     void loadItems() {
+        setDummyItems();
         updateItemList();
     }
 
@@ -83,10 +87,19 @@ public class FamController {
 
         int i = items.getSelectionModel().getSelectedIndex();
 
-        bookings.getItems().add(i, itemObjectList.get(i).getName() + " is booked");
+        Booking tempBooking = new Booking(itemObjectList.get(i), dummyUser,
+                startDate.getValue(), endDate.getValue());
 
-        // Booking tempBooking = new Booking(itemObjectList.get(i), dummyUser,
-        // startDate.getValue(), endDate.getValue());
+        bookingObjectList.add(tempBooking);
+        updateBookingList();
+
+        // bookings.getItems().add(i, items.getItems().get(i));
+
+        // System.out.println(bookings.getItems());
+
+        // System.out.println(tempBooking.getStartDate() + " is start date");
+        // System.out.println(tempBooking.getEndDate() + " is end date");
+
         // try {
         // calendar.addBooking(tempBooking);
         // } catch (IllegalStateException e) {

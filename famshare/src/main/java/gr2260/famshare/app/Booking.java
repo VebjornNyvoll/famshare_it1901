@@ -21,7 +21,7 @@ public class Booking {
         this.startDate = startDate;
         this.endDate = endDate;
         Stream<LocalDate> dates = startDate.datesUntil(endDate.plusDays(1));
-        this.allDates = dates.collect(Collectors.toList());
+        // this.allDates = dates.collect(Collectors.toList());
     }
 
     public Item getBookedObject() {
