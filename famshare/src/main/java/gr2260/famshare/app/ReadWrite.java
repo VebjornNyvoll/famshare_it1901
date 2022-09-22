@@ -15,9 +15,10 @@ import org.json.simple.parser.JSONParser;
 
 
 public class ReadWrite {
+    private String filePath = "src/main/resources/gr2260/famshare/app/bookings.json";
 
     public void saveBookings(List<Booking> bookings) throws FileNotFoundException { 
-        File file = new File("bookings.json");
+        File file = new File(filePath);
         PrintWriter pw = new PrintWriter(file);
         JSONObject obj = new JSONObject();
         for (Booking b : bookings) {
@@ -32,7 +33,7 @@ public class ReadWrite {
 
     public List<Booking> loadBookings() throws FileNotFoundException {
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("bookings.json")) {
+        try (Reader reader = new FileReader(filePath)) {
             List<Booking> bookings = new ArrayList<Booking>();
             Scanner sc = new Scanner(reader);
             while (sc.hasNextLine()) {

@@ -40,8 +40,9 @@ public class Calendar {
         // same as the new booking. If true, it then checks if there is any overlap
         // between the dates.
         // Returns false if there is an overlap and returns true if there is none.
+        // Temporarily checking using name instead of ids
         for (Booking booking : bookings) {
-            if (booking.getBookedObject().equals(newBooking.getBookedObject())) {
+            if (booking.getBookedObject().getName().equals(newBooking.getBookedObject().getName())) {
                 if (!Collections.disjoint(booking.getAllDates(), newBooking.getAllDates())) {
                     return false;
                 }
