@@ -13,35 +13,87 @@ public class Booking {
     private User booker;
     private LocalDate startDate;
     private LocalDate endDate;
+    private int bookingId;
     private List<LocalDate> allDates;
 
-    public Booking(Item bookedObject, User booker, LocalDate startDate, LocalDate endDate) {
-        this.bookedObject = bookedObject;
-        this.booker = booker;
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public Booking() {
+    }
+
+    // Temporary constructor for testing purposes
+    public Booking(Item bookedObject, User booker, LocalDate startDate, LocalDate endDate, int bookingId) {
+        setBookedObject(bookedObject);
+        setBooker(booker);
+        setDates(startDate, endDate);
+        setBookingId(bookingId);
+    }
+
+    // Sets start and end dates and fills allDates list with all dates between start
+    // and end date.
+    public void setDates(LocalDate startDate, LocalDate endDate) {
+        setStartDate(startDate);
+        setEndDate(endDate);
         Stream<LocalDate> dates = startDate.datesUntil(endDate.plusDays(1));
-        // this.allDates = dates.collect(Collectors.toList());
+        this.allDates = dates.collect(Collectors.<LocalDate>toList());
+    }
+
+    public void setBookingId(int id) {
+        this.bookingId = id;
+    }
+
+    public int getBookingId() {
+        return this.bookingId;
+    }
+
+    public void setBookedObject(Item bookedObject) {
+        if (bookedObject == null) {
+            throw new IllegalStateException("bookedObject cannot be null");
+        }
+        this.bookedObject = bookedObject;
+    }
+
+    public void setBooker(User booker) {
+        if (booker == null) {
+            throw new IllegalStateException("booker cannot be null");
+        }
+        this.booker = booker;
+    }
+
+    // Ensures that the startDate is not before the current date by checking users
+    // localtime.
+    private void setStartDate(LocalDate startDate) {
+        if (startDate.isBefore(LocalDate.now())) {
+            throw new IllegalStateException("Can't book dates that have passed!");
+        }
+        this.startDate = startDate;
+    }
+
+    private void setEndDate(LocalDate endDate) {
+        if (this.startDate == null || endDate.isBefore(startDate)) {
+            throw new IllegalStateException(
+                    "endDate must be set after startDate and must be a date equal to or later than startDate");
+        }
+        this.endDate = endDate;
     }
 
     public Item getBookedObject() {
-        return bookedObject;
+        return this.bookedObject;
     }
 
     public User getBooker() {
-        return booker;
+        return this.booker;
     }
 
-    public String getStartDate() {
-        return startDate.toString();
+    public LocalDate getStartDate() {
+        return LocalDate.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth());
     }
 
-    public String getEndDate() {
-        return endDate.toString();
+    public LocalDate getEndDate() {
+        return LocalDate.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth());
     }
 
     public List<LocalDate> getAllDates() {
-        return allDates;
+        List<LocalDate> allDatesCopy = new ArrayList<>(allDates);
+        return allDatesCopy;
     }
 
     @Override
