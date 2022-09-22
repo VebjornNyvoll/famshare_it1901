@@ -5,22 +5,28 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2260.famshare.app.FamController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gr2260.famshare.app.FamController">
    <children>
-      <ListView fx:id="bookings" layoutX="14.0" layoutY="99.0" prefHeight="303.0" prefWidth="266.0" />
-      <DatePicker fx:id="startDate" layoutX="333.0" layoutY="334.0" prefHeight="25.0" prefWidth="95.0" />
-      <Text layoutX="335.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" />
-      <Text layoutX="324.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items" />
-      <DatePicker fx:id="endDate" layoutX="433.0" layoutY="334.0" prefHeight="25.0" prefWidth="95.0" />
-      <Text layoutX="433.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" />
-      <TextField fx:id="description" layoutX="331.0" layoutY="292.0" prefHeight="25.0" prefWidth="195.0" />
-      <Text layoutX="331.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
-      <Button layoutX="337.0" layoutY="377.0" onAction="#book" prefHeight="25.0" prefWidth="88.0" text="Book" />
-      <ListView fx:id="items" layoutX="324.0" layoutY="99.0" prefHeight="170.0" prefWidth="266.0" />
+      <ListView fx:id="bookingView" layoutX="14.0" layoutY="99.0" prefHeight="303.0" prefWidth="303.0" />
+      <DatePicker fx:id="startDate" layoutX="340.0" layoutY="335.0" prefHeight="25.0" prefWidth="101.0" />
+      <Text layoutX="341.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" />
+      <Text layoutX="337.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items" />
+      <DatePicker fx:id="endDate" layoutX="455.0" layoutY="335.0" prefHeight="25.0" prefWidth="95.0" />
+      <Text layoutX="453.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" />
+      <TextField fx:id="description" layoutX="339.0" layoutY="288.0" prefHeight="25.0" prefWidth="209.0" />
+      <Text layoutX="337.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
+      <Button layoutX="341.0" layoutY="377.0" onAction="#book" prefHeight="25.0" prefWidth="101.0" text="Book" />
+      <ListView fx:id="itemView" layoutX="339.0" layoutY="100.0" prefHeight="161.0" prefWidth="209.0" />
       <Text layoutX="14.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bookings" />
-      <Text fx:id="exceptionText" layoutX="334.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="252.22900390625" />
-      <Button layoutX="434.0" layoutY="377.0" onAction="#loadItems" prefHeight="25.0" prefWidth="95.0" text="Load items" />
+      <Text fx:id="exceptionText" layoutX="339.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="226.05120849609375" />
+      <Button layoutX="457.0" layoutY="378.0" onAction="#loadItems" prefHeight="25.0" prefWidth="92.0" text="Load items" />
+      <Text layoutX="16.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Family share">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

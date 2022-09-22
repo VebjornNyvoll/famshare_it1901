@@ -10,6 +10,10 @@ public class Calendar {
     // those objects.
     private ArrayList<Booking> bookings;
 
+    public Calendar() {
+        bookings = new ArrayList<>();
+    }
+
     public void removeBooking(int bookingId) {
         bookings.remove(bookingId);
     }

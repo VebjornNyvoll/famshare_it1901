@@ -1,15 +1,11 @@
 package gr2260.famshare.app;
 
-import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -19,24 +15,15 @@ public class FamController {
 
     private Calendar calendar;
     private List<Item> itemObjectList;
-    private List<Booking> bookingObjectList;
-    private List<Integer> idList;
-    private int idIndex;
     private User dummyUser = new User();
 
     public FamController() {
-        idList = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-        idIndex = 0;
-        bookingObjectList = new ArrayList<>();
-        itemObjectList = new ArrayList<>();
+        calendar = new Calendar();
+        dummyUser.setName("Dummy User");
     }
 
-    // void initialize(URL location, ResourceBundle resources) {
-    // updateItemList();
-    // }
-
     @FXML
-    private ListView<String> bookings, items;
+    private ListView<String> bookingView, itemView;
 
     @FXML
     private DatePicker startDate, endDate;
@@ -47,63 +34,56 @@ public class FamController {
     @FXML
     private TextField description;
 
-    public void setDummyItems() {
+    public void setDummyItems() { // will load itemView from external file later
 
         Item cabin = new Item();
-        cabin.setName("cabin");
+        cabin.setName("Cabin");
         cabin.setID(1);
         Item car = new Item();
-        car.setName("car");
+        car.setName("Car");
         car.setID(2);
         Item boat = new Item();
-        boat.setName("boat");
+        boat.setName("Boat");
         boat.setID(3);
 
         itemObjectList = new ArrayList<>(Arrays.asList(cabin, car, boat));
-
     }
 
-    public void updateItemList() {
-        items.getItems().clear();
+    public void updateItemView() {
+        itemView.getItems().clear();
         for (int i = 0; i < itemObjectList.size(); i++) {
-            items.getItems().add(i, itemObjectList.get(i).getName());
+            itemView.getItems().add(i, itemObjectList.get(i).getName());
         }
     }
 
-    public void updateBookingList() {
-        bookings.getItems().clear();
-        for (Booking booking : bookingObjectList) {
-            bookings.getItems().add(booking.toString());
+    public void updateBookingView() {
+        bookingView.getItems().clear();
+        for (Booking booking : calendar.getBookings()) {
+            bookingView.getItems().add(booking.toString());
         }
     }
 
     @FXML
     void loadItems() {
         setDummyItems();
-        updateItemList();
+        updateItemView();
     }
 
     @FXML
     void book() {
         exceptionText.setText("");
 
-        Booking tempBooking;
-        LocalDate startD;
-        LocalDate endD;
-
-        int i = items.getSelectionModel().getSelectedIndex();
-
         try {
-            startD = startDate.getValue();
-            endD = endDate.getValue();
+            int i = itemView.getSelectionModel().getSelectedIndex();
+            LocalDate startD = startDate.getValue();
+            LocalDate endD = endDate.getValue();
+            Booking newBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD, 10);// temp dummy id
 
-            tempBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD, 10);// temp dummy id
+            calendar.addBooking(newBooking);
+            updateBookingView();
 
-            bookingObjectList.add(tempBooking);
         } catch (Exception e) {
             exceptionText.setText(e.getMessage());
         }
-        updateBookingList();
     }
-
 }
