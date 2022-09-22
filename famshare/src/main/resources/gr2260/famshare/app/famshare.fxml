@@ -21,11 +21,10 @@
       <Text layoutX="453.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" />
       <TextField fx:id="description" layoutX="339.0" layoutY="288.0" prefHeight="25.0" prefWidth="209.0" />
       <Text layoutX="337.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
-      <Button layoutX="341.0" layoutY="377.0" onAction="#book" prefHeight="25.0" prefWidth="101.0" text="Book" />
+      <Button layoutX="341.0" layoutY="377.0" onAction="#book" prefHeight="25.0" prefWidth="209.0" text="Book" />
       <ListView fx:id="itemView" layoutX="339.0" layoutY="100.0" prefHeight="161.0" prefWidth="209.0" />
       <Text layoutX="14.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bookings" />
       <Text fx:id="exceptionText" layoutX="339.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="226.05120849609375" />
-      <Button layoutX="457.0" layoutY="378.0" onAction="#loadItems" prefHeight="25.0" prefWidth="92.0" text="Load items" />
       <Text layoutX="14.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Family share">
          <font>
             <Font size="30.0" />

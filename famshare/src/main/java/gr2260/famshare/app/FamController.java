@@ -49,6 +49,13 @@ public class FamController {
         itemObjectList = new ArrayList<>(Arrays.asList(cabin, car, boat));
     }
 
+    @FXML
+    void initialize() {
+        setDummyItems();
+        updateItemView();
+        updateBookingView();
+    }
+
     public void updateItemView() {
         itemView.getItems().clear();
         for (int i = 0; i < itemObjectList.size(); i++) {
@@ -63,11 +70,11 @@ public class FamController {
         }
     }
 
-    @FXML
-    void loadItems() {
-        setDummyItems();
-        updateItemView();
-    }
+    // @FXML
+    // void loadItems() {
+    // setDummyItems();
+    // updateItemView();
+    // }
 
     @FXML
     void book() {
