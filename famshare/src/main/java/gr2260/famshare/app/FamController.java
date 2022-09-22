@@ -97,7 +97,7 @@ public class FamController {
             startD = startDate.getValue();
             endD = endDate.getValue();
 
-            tempBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD);
+            tempBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD, 10);// temp dummy id
 
             bookingObjectList.add(tempBooking);
         } catch (Exception e) {
