@@ -20,7 +20,7 @@
       <Button layoutX="337.0" layoutY="377.0" onAction="#book" prefHeight="25.0" prefWidth="88.0" text="Book" />
       <ListView fx:id="items" layoutX="324.0" layoutY="99.0" prefHeight="170.0" prefWidth="266.0" />
       <Text layoutX="14.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bookings" />
-      <Text fx:id="exception" layoutX="334.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="252.22900390625" />
+      <Text fx:id="exceptionText" layoutX="334.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="252.22900390625" />
       <Button layoutX="434.0" layoutY="377.0" onAction="#loadItems" prefHeight="25.0" prefWidth="95.0" text="Load items" />
    </children>
 </Pane>

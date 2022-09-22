@@ -1,6 +1,7 @@
 package gr2260.famshare.app;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +42,7 @@ public class FamController {
     private DatePicker startDate, endDate;
 
     @FXML
-    private Text exception;
+    private Text exceptionText;
 
     @FXML
     private TextField description;
@@ -84,38 +85,25 @@ public class FamController {
 
     @FXML
     void book() {
+        exceptionText.setText("");
+
+        Booking tempBooking;
+        LocalDate startD;
+        LocalDate endD;
 
         int i = items.getSelectionModel().getSelectedIndex();
 
-        Booking tempBooking = new Booking(itemObjectList.get(i), dummyUser,
-                startDate.getValue(), endDate.getValue());
+        try {
+            startD = startDate.getValue();
+            endD = endDate.getValue();
 
-        bookingObjectList.add(tempBooking);
-        updateBookingList();
+            tempBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD);
 
-        // bookings.getItems().add(i, items.getItems().get(i));
-
-        // System.out.println(bookings.getItems());
-
-        // System.out.println(tempBooking.getStartDate() + " is start date");
-        // System.out.println(tempBooking.getEndDate() + " is end date");
-
-        // try {
-        // calendar.addBooking(tempBooking);
-        // } catch (IllegalStateException e) {
-        // exception.setText(e.getMessage());
-        // }
-        // items.getItems().remove(i);
-
-    }
-
-    public boolean isAvailable(Booking newBooking) {
-        if (calendar.isAvailable(newBooking)) {
-            // setter inn i lista etter ID-indeks, bare en midlertidig løsning
-            bookings.getItems().set(idIndex, newBooking.toString());
-            idIndex++;
-            return true;
+            bookingObjectList.add(tempBooking);
+        } catch (Exception e) {
+            exceptionText.setText(e.getMessage());
         }
-        return false;
+        updateBookingList();
     }
+
 }
