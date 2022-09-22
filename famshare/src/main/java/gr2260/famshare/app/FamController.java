@@ -45,8 +45,17 @@ public class FamController {
         Item boat = new Item();
         boat.setName("Boat");
         boat.setID(3);
+        Item drill = new Item();
+        drill.setName("Drill");
+        drill.setID(4);
+        Item bike = new Item();
+        bike.setName("Bike");
+        bike.setID(5);
+        Item toolBox = new Item();
+        toolBox.setName("Tool box");
+        toolBox.setID(6);
 
-        itemObjectList = new ArrayList<>(Arrays.asList(cabin, car, boat));
+        itemObjectList = new ArrayList<>(Arrays.asList(cabin, car, boat, drill, bike, toolBox));
     }
 
     @FXML
@@ -69,12 +78,6 @@ public class FamController {
             bookingView.getItems().add(booking.toString());
         }
     }
-
-    // @FXML
-    // void loadItems() {
-    // setDummyItems();
-    // updateItemView();
-    // }
 
     @FXML
     void book() {
