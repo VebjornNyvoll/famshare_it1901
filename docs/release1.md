@@ -12,4 +12,4 @@ In this release we've implemented the first and most basic version of the progra
 - A list showing the user previous bookings.
     - Shows which item is booked, who booked it (currently only "dummy user"),  
     and which dates the item is booked.
-- Tests utilize the Maven Surefire Report plugin and current test coverage is 8%.
+- Tests utilize the Maven Surefire Report plugin with jacoco and current test coverage is 8%.
