@@ -16,6 +16,7 @@ public class FamController {
     private Calendar calendar;
     private List<Item> itemObjectList;
     private User dummyUser = new User();
+    private ReadWrite rw = new ReadWrite();
 
     public FamController() {
         calendar = new Calendar();
@@ -76,6 +77,12 @@ public class FamController {
         bookingView.getItems().clear();
         for (Booking booking : calendar.getBookings()) {
             bookingView.getItems().add(booking.toString());
+        }
+        //Adds bookings in bookingview to json file
+        try {
+            rw.saveBookings(calendar.getBookings());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
