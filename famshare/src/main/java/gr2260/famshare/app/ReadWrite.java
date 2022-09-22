@@ -2,13 +2,16 @@ package gr2260.famshare.app;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.PrintWriter;
+import java.io.Reader;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 
 public class ReadWrite {
@@ -27,34 +30,28 @@ public class ReadWrite {
         pw.close();
     }
 
-    public String loadBookings() throws FileNotFoundException {
-        File file = new File("bookings.json");
-        Scanner sc = new Scanner(file);
-        String json = "";
-        while (sc.hasNextLine()) {
-            json += sc.nextLine();
+    public List<Booking> loadBookings() throws FileNotFoundException {
+        JSONParser parser = new JSONParser();
+        try (Reader reader = new FileReader("bookings.json")) {
+            List<Booking> bookings = new ArrayList<Booking>();
+            Scanner sc = new Scanner(reader);
+            while (sc.hasNextLine()) {
+                JSONObject obj = (JSONObject) parser.parse(sc.nextLine());
+                String bookedObject = (String) obj.get("bookedObject");
+                String booker = (String) obj.get("booker");
+                String startDate = (String) obj.get("startDate");
+                String endDate = (String) obj.get("endDate");
+                Item item = new Item();
+                item.setName(bookedObject);
+                User user = new User();
+                user.setName(booker);
+                bookings.add(new Booking(item, user, LocalDate.parse(startDate), LocalDate.parse(endDate)));
+            }
+            sc.close();
+            return bookings;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        sc.close();
-        return json;
-    }
-
-    public static void main(String[] args) throws FileNotFoundException {
-        ReadWrite rw = new ReadWrite();
-        List<Booking> bookings = new ArrayList<>();
-        Item i1 = new Item();
-        i1.setName("Item1");
-        i1.setID(1);
-        i1.setDecsripion("test");
-        User u1 = new User();
-        u1.setName("User1");
-        u1.setId(1);
-        u1.addItem(i1.getID());
-        LocalDate startDate = LocalDate.of(2020, 1, 1);
-        LocalDate endDate = LocalDate.of(2020, 1, 2);
-        Booking b1 = new Booking(i1, u1, startDate, endDate);
-        bookings.add(b1);
-        rw.saveBookings(bookings);
-        String json = rw.loadBookings();
-        System.out.println(json);
+        return null;
     }
 }
