@@ -1,4 +1,5 @@
-package gr2260.famshare.app;
+package famshare.ui;
+
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

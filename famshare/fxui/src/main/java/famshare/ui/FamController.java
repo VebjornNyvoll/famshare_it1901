@@ -1,4 +1,4 @@
-package gr2260.famshare.app;
+package famshare.ui;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -11,6 +11,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+
+import 
 
 public class FamController {
 
