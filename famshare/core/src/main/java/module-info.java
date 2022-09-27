@@ -1,7 +1,6 @@
-module gr2260.famshare.app {
-    requires javafx.controls;
-    requires javafx.fxml;
+module gr2260.famshare.core {
     requires json.simple;
 
-    opens gr2260.famshare.app to javafx.graphics, javafx.fxml;
+    exports gr2260.famshare.core;
+    exports gr2260.famshare.json;
 }
