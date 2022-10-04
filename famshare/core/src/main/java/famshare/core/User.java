@@ -1,4 +1,4 @@
-package gr2260.famshare.app;
+package famshare.core;
 
 import java.util.ArrayList;
 

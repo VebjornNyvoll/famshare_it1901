@@ -1,4 +1,4 @@
-
+package famshare.ui;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -12,7 +12,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-import famshare.core.Calendar;
+import famshare.core.*;
+import famshare.json.*;
+
 
 public class FamController {
 

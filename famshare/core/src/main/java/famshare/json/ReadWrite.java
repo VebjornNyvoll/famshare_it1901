@@ -1,4 +1,4 @@
-package gr2260.famshare.app;
+package famshare.json;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,9 +13,15 @@ import java.util.Scanner;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import famshare.core.Booking;
+import famshare.core.Item;
+import famshare.core.User;
+
+
+
 
 public class ReadWrite {
-    private String filePath = "src/main/resources/gr2260/famshare/app/bookings.json";
+    private String filePath = "src/main/resources/famshare/ui/bookings.json";
 
     public void saveBookings(List<Booking> bookings) throws FileNotFoundException { 
         File file = new File(filePath);
