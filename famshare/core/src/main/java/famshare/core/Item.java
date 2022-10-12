@@ -28,4 +28,7 @@ public class Item {
   public int getID() {
     return this.itemID;
   }
+
+public void setDescription(String asText) {
+}
 }
