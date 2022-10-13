@@ -20,7 +20,7 @@ import javafx.scene.text.Text;
 
 import famshare.core.*;
 import famshare.json.*;
-import famshare.json.internal.BookingsModule;
+
 
 
 public class FamController {
@@ -32,7 +32,7 @@ public class FamController {
 
     public FamController() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new BookingsModule());
+        mapper.registerModule(new CalendarModule());
         try {
             calendar = mapper.readValue(new File(filePath), Calendar.class);
         } catch (JsonMappingException e) {
