@@ -1,10 +1,16 @@
 package famshare.ui;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -16,15 +22,22 @@ import famshare.core.*;
 import famshare.json.*;
 
 
+
 public class FamController {
 
     private Calendar calendar;
     private List<Item> itemObjectList;
     private User dummyUser = new User();
-    private ReadWrite rw = new ReadWrite();
+    private String filePath = "calendar.json";
 
-    public FamController() {
-        calendar = new Calendar();
+    public FamController() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new CalendarModule());
+        try {
+            calendar = mapper.readValue(new File(filePath), Calendar.class);
+        } catch (JsonMappingException e) {
+            calendar = new Calendar();
+        }
         dummyUser.setName("Dummy User");
     }
 
@@ -68,10 +81,6 @@ public class FamController {
     void initialize() throws FileNotFoundException {
         setDummyItems();
         updateItemView();
-        List<Booking> bookings = rw.loadBookings();
-        for (Booking b : bookings) {
-            calendar.addBooking(b);
-        }
         updateBookingView();
         //Reads from file and adds bookings to calendar
         
@@ -90,11 +99,15 @@ public class FamController {
             bookingView.getItems().add(booking.toString());
         }
         //Adds bookings in bookingview to json file
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new CalendarModule());
         try {
-            rw.saveBookings(calendar.getBookings());
-        } catch (Exception e) {
+            mapper.writeValue(new File(filePath), calendar);
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 
     @FXML

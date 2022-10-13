@@ -60,14 +60,14 @@ public class Booking {
 
     // Ensures that the startDate is not before the current date by checking users
     // localtime.
-    private void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDate startDate) {
         if (startDate.isBefore(LocalDate.now())) {
             throw new IllegalStateException("Can't book dates that have passed!");
         }
         this.startDate = startDate;
     }
 
-    private void setEndDate(LocalDate endDate) {
+    public void setEndDate(LocalDate endDate) {
         if (this.startDate == null || endDate.isBefore(startDate)) {
             throw new IllegalStateException(
                     "endDate must be set after startDate and must be a date equal to or later than startDate");
