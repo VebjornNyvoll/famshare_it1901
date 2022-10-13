@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="581.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="famshare.ui.FamController">
+   <children>
+      <ListView fx:id="bookingView" layoutX="14.0" layoutY="99.0" prefHeight="303.0" prefWidth="303.0" />
+      <DatePicker fx:id="startDate" layoutX="340.0" layoutY="335.0" prefHeight="25.0" prefWidth="101.0" />
+      <Text layoutX="341.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" />
+      <Text layoutX="337.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Items" />
+      <DatePicker fx:id="endDate" layoutX="455.0" layoutY="335.0" prefHeight="25.0" prefWidth="95.0" />
+      <Text layoutX="453.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="End date" />
+      <TextField fx:id="description" layoutX="339.0" layoutY="288.0" prefHeight="25.0" prefWidth="209.0" />
+      <Text layoutX="337.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
+      <Button fx:id="bookItemButton" layoutX="341.0" layoutY="377.0" onAction="#book" prefHeight="25.0" prefWidth="209.0" text="Book" />
+      <ListView fx:id="itemView" layoutX="339.0" layoutY="100.0" prefHeight="161.0" prefWidth="209.0" />
+      <Text layoutX="14.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bookings" />
+      <Text fx:id="exceptionText" layoutX="339.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="226.05120849609375" />
+      <Text layoutX="14.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Family share">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="79.0" fitWidth="421.0" layoutX="393.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@famshare.png" />
+         </image>
+      </ImageView>
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</Pane>
