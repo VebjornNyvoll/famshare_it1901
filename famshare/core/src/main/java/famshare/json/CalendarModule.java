@@ -2,7 +2,9 @@ package famshare.json;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
+import famshare.core.Booking;
 import famshare.core.Calendar;
+import famshare.core.Item;
 
 @SuppressWarnings("serial")
 public class CalendarModule extends SimpleModule {
@@ -13,6 +15,10 @@ public class CalendarModule extends SimpleModule {
         addSerializer(Calendar.class, new CalendarSerializer());
         addDeserializer(Calendar.class, new CalendarDeserializer());
 
-        
+        addSerializer(Booking.class, new BookingSerializer());
+        addDeserializer(Booking.class, new BookingDeserializer());
+
+        addSerializer(Item.class, new ItemSerializer());
+        addDeserializer(Item.class, new ItemDeserializer());
     }
 }

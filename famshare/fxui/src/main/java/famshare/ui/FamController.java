@@ -100,7 +100,7 @@ public class FamController {
         }
         //Adds bookings in bookingview to json file
         ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new BookingsModule());
+        mapper.registerModule(new CalendarModule());
         try {
             mapper.writeValue(new File(filePath), calendar);
         } catch (IOException e) {
