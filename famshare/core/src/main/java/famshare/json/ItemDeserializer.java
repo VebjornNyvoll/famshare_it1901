@@ -36,7 +36,7 @@ public class ItemDeserializer extends StdDeserializer<Item> {
         Item.setDescription(description);
         JsonNode itemIDNode = node.get("itemID");
         int itemID = itemIDNode.asInt();
-        Item.setID(itemID);
+        Item.setId(itemID);
         return Item;
     }
 }

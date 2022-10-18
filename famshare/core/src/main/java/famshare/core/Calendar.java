@@ -39,7 +39,7 @@ public class Calendar {
         // Returns false if there is an overlap and returns true if there is none.
         // Checks using itemID
         for (Booking booking : bookings) {
-            if (booking.getBookedObject().getID() == newBooking.getBookedObject().getID()) {
+            if (booking.getBookedObject().getId() == newBooking.getBookedObject().getId()) {
                 if (booking.getAllDates().stream().anyMatch(newBooking.getAllDates()::contains)) {
                     return false;
                 }

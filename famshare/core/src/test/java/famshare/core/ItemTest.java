@@ -20,13 +20,13 @@ public class ItemTest {
 
   @Test
   public void getAndSetDescriptionTest() throws Exception {
-    itm.setDecsripion("This is a very cool item for important people");
+    itm.setDescription("This is a very cool item for important people");
     assertSame("This is a very cool item for important people", itm.getDescription());
   }
 
   @Test
   public void getAndSetIdTest() throws Exception {
-    itm.setID(0);
-    assertSame(0, itm.getID());
+    itm.setId(0);
+    assertSame(0, itm.getId());
   }
 }
