@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ItemTest {
-  /* private Item itm = null;
+  private Item itm = null;
 
   @Before
   public void init() {
@@ -28,5 +28,5 @@ public class ItemTest {
   public void getAndSetIdTest() throws Exception {
     itm.setID(0);
     assertSame(0, itm.getID());
-  } */
+  }
 }
