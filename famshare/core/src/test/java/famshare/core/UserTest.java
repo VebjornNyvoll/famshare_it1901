@@ -25,7 +25,7 @@ public class UserTest {
   @Test
   public void setAndGetIdTest() throws Exception {
     usr.setId(0);
-    assertEquals(0, usr.getID());
+    assertEquals(0, usr.getId());
   }
 
   @Test

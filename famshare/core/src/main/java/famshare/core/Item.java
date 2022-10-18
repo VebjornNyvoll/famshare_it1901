@@ -13,7 +13,7 @@ public class Item {
     return this.name;
   }
 
-  public void setDecsripion(String description) {
+  public void setDescription(String description) {
     this.description = description;
   }
 
@@ -21,14 +21,12 @@ public class Item {
     return this.description;
   }
 
-  public void setID(int id) {
+  public void setId(int id) {
     this.itemID = id;
   }
 
-  public int getID() {
+  public int getId() {
     return this.itemID;
   }
 
-public void setDescription(String asText) {
-}
 }

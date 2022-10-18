@@ -42,7 +42,7 @@ public class BookingDeserializer extends StdDeserializer<Booking> {
         Item item = new Item();
         item.setName(itemNode.get("name").asText());
         item.setDescription(itemNode.get("description").asText());
-        item.setID(itemNode.get("itemID").asInt());
+        item.setId(itemNode.get("itemID").asInt());
         Booking.setBookedObject(item);
 
         //Gets the date from json

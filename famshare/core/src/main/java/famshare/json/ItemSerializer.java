@@ -27,7 +27,7 @@ public class ItemSerializer extends StdSerializer<Item> {
     jsonGen.writeStartObject();
     jsonGen.writeStringField("name", item.getName());
     jsonGen.writeStringField("description", item.getDescription());
-    jsonGen.writeNumberField("itemID", item.getID());
+    jsonGen.writeNumberField("itemID", item.getId());
     jsonGen.writeEndObject();
   }
 

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -59,22 +58,22 @@ public class FamController {
 
         Item cabin = new Item();
         cabin.setName("Cabin");
-        cabin.setID(1);
+        cabin.setId(1);
         Item car = new Item();
         car.setName("Car");
-        car.setID(2);
+        car.setId(2);
         Item boat = new Item();
         boat.setName("Boat");
-        boat.setID(3);
+        boat.setId(3);
         Item drill = new Item();
         drill.setName("Drill");
-        drill.setID(4);
+        drill.setId(4);
         Item bike = new Item();
         bike.setName("Bike");
-        bike.setID(5);
+        bike.setId(5);
         Item toolBox = new Item();
         toolBox.setName("Tool box");
-        toolBox.setID(6);
+        toolBox.setId(6);
 
         itemObjectList = new ArrayList<>(Arrays.asList(cabin, car, boat, drill, bike, toolBox));
     }

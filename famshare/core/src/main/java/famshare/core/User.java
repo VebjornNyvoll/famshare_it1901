@@ -22,7 +22,7 @@ public class User {
     this.id = id;
   }
 
-  public int getID() {
+  public int getId() {
     return id;
   }
 
@@ -30,14 +30,14 @@ public class User {
     return items;
   }
 
-  public void addItem(int itemID) {
-    this.items.add(itemID);
+  public void addItem(int itemId) {
+    this.items.add(itemId);
   }
 
-  public void removeItem(int itemID) {
+  public void removeItem(int itemId) {
     // Should maybe encapsulate in while loop to make sure any duplicate instances get removed
     // Ideally this wouldn't happen to begin with but y'know
-    this.items.remove(itemID);
+    this.items.remove(itemId);
   }
 
 }
