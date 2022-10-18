@@ -19,17 +19,17 @@ public class CalendarTest {
     public void init() {
         bkn0.setBookingId(0);
         bkn1.setBookingId(1);
+        bkn0.setBookedObject(itm);
+        bkn1.setBookedObject(itm);
 
         date = LocalDate.now();
     }
 
     @Test
     public void addBookingValidDateTest() throws Exception {
-        bkn0.setBookedObject(itm);
         bkn0.setStartDate(date);
         bkn0.setEndDate(date.plusDays(2));
 
-        bkn1.setBookedObject(itm);
         bkn1.setStartDate(date.plusDays(3));
         bkn1.setEndDate(date.plusDays(5));
 
@@ -52,11 +52,9 @@ public class CalendarTest {
 
     @Test(expected = IllegalStateException.class)
     public void addBookingAlreadyBookedTest() throws Exception {
-        bkn0.setBookedObject(itm);
         bkn0.setStartDate(date);
         bkn0.setEndDate(date.plusDays(2));
         
-        bkn1.setBookedObject(itm);
         bkn1.setStartDate(date);
         bkn1.setEndDate(date.plusDays(2));
 
