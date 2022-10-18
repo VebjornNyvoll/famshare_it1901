@@ -1,12 +1,11 @@
 package famshare.core;
 
-import static org.junit.Assert.assertSame;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CalendarTest {
     private Calendar cal = new Calendar();
@@ -15,7 +14,7 @@ public class CalendarTest {
     private Item itm = new Item();
     private LocalDate date = null;
 
-    @Before
+    @BeforeEach
     public void init() {
         bkn0.setBookingId(0);
         bkn1.setBookingId(1);
@@ -40,14 +39,17 @@ public class CalendarTest {
         bookings.add(bkn0);
         bookings.add(bkn1);
 
-        assertSame(bookings, cal.getBookings());
+        Assertions.assertEquals(bookings, cal.getBookings());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void addBookingInvalidDateTest() throws Exception {
         bkn0.setStartDate(null);
         bkn0.setEndDate(null);
-        cal.addBooking(bkn0);
+
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            cal.addBooking(bkn0);
+        });
     }
 
     @Test(expected = IllegalStateException.class)
@@ -58,8 +60,10 @@ public class CalendarTest {
         bkn1.setStartDate(date);
         bkn1.setEndDate(date.plusDays(2));
 
-        cal.addBooking(bkn0);
-        cal.addBooking(bkn1);
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+            cal.addBooking(bkn0);
+            cal.addBooking(bkn1);
+        });
     }
 
     @Test
@@ -80,6 +84,6 @@ public class CalendarTest {
         ArrayList<Booking> bookings = new ArrayList<Booking>();
         bookings.add(bkn1);
 
-        assertSame(bookings, cal.getBookings());
+        Assertions.assertEquals(bookings, cal.getBookings());
     }
 }
