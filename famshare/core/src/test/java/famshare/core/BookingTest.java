@@ -1,17 +1,16 @@
 package famshare.core;
 
-import static org.junit.Assert.assertSame;
-
 import java.time.LocalDate;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BookingTest {
     private Booking booking = null;
     private LocalDate date = null;
 
-    @Before
+    @BeforeEach
     public void init() {
         booking = new Booking();
         date = LocalDate.now();
@@ -20,7 +19,7 @@ public class BookingTest {
     @Test
     public void getSetBookingIDTest() {
         booking.setBookingId(0);
-        assertSame(0, booking.getBookingId());
+        Assertions.assertEquals(0, booking.getBookingId());
     }
 
     @Test
@@ -29,48 +28,54 @@ public class BookingTest {
 
         booking.setBookedObject(item);
 
-        assertSame(item, booking.getBookedObject());
+        Assertions.assertEquals(item, booking.getBookedObject());
     }
     
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void setBookedObjectNullTest() {
-        booking.setBookedObject(null);
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+            booking.setBookedObject(null);
+        });
     }
 
     @Test
     public void getSetBookerTest() {
         User usr = new User();
         booking.setBooker(usr);
-        assertSame(usr, booking.getBooker());
+        Assertions.assertEquals(usr, booking.getBooker());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void setBookerNullTest() {
-        booking.setBooker(null);
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+            booking.setBooker(null);
+        });
     }
 
     @Test
     public void getSetStartDateTest() {
-        booking.setStartDate(date);
-        assertSame(date, booking.getStartDate());
+        booking.setDates(date, date.plusDays(5));
+        Assertions.assertEquals(date, booking.getStartDate());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void setStartDateTooEarlyTest() {
-        booking.setStartDate(date.minusDays(10));
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+            booking.setDates(date.minusDays(10), date.plusDays(5));
+        });
     }
 
     @Test
     public void getSetEndDateTest() {
-        booking.setStartDate(date);
-        booking.setEndDate(date.plusDays(10));
-        assertSame(date.plusDays(10), booking.getEndDate());
+        booking.setDates(date, date.plusDays(10));
+        Assertions.assertEquals(date.plusDays(10), booking.getEndDate());
 
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void setEndDateBeforeStartDateTest() {
-        booking.setStartDate(date);
-        booking.setEndDate(date.minusDays(10));
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+            booking.setDates(date, date.minusDays(10));
+        });
     }
 }
