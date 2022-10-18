@@ -49,7 +49,6 @@
       <version>5.2.0</version>
       <scope>test</scope>
     </dependency>
-<<<<<<< HEAD
 
     <dependency>
       <groupId>org.testfx</groupId>
@@ -59,9 +58,6 @@
     </dependency>
 
   </dependencies>
-=======
-    </dependencies>
->>>>>>> fd01a37d5145e08a661216dc9557e5483cba5f62
 
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
