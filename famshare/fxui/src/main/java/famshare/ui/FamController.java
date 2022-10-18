@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -29,7 +30,7 @@ public class FamController {
     private Calendar calendar;
     private List<Item> itemObjectList;
     private User dummyUser = new User();
-    private String filePath = "calendar.json";
+    private String filePath = "src/main/resources/famshare/ui/calendar.json";
 
     public FamController() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
