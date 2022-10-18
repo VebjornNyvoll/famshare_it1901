@@ -54,21 +54,20 @@ public class BookingTest {
 
     @Test
     public void getSetStartDateTest() {
-        booking.setStartDate(date);
+        booking.setDates(date, date.plusDays(5));
         Assertions.assertEquals(date, booking.getStartDate());
     }
 
     @Test
     public void setStartDateTooEarlyTest() {
         Assertions.assertThrows(IllegalStateException.class, () -> {
-            booking.setStartDate(date.minusDays(10));
+            booking.setDates(date.minusDays(10), date.plusDays(5));
         });
     }
 
     @Test
     public void getSetEndDateTest() {
-        booking.setStartDate(date);
-        booking.setEndDate(date.plusDays(10));
+        booking.setDates(date, date.plusDays(10));
         Assertions.assertEquals(date.plusDays(10), booking.getEndDate());
 
     }
@@ -76,8 +75,7 @@ public class BookingTest {
     @Test
     public void setEndDateBeforeStartDateTest() {
         Assertions.assertThrows(IllegalStateException.class, () -> {
-            booking.setStartDate(date);
-            booking.setEndDate(date.minusDays(10));
+            booking.setDates(date, date.minusDays(10));
         });
     }
 }

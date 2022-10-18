@@ -12,25 +12,28 @@ public class CalendarTest {
     private Booking bkn0 = new Booking();
     private Booking bkn1 = new Booking();
     private Item itm = new Item();
+    private Item itm2 = new Item();
     private LocalDate date = null;
 
     @BeforeEach
     public void init() {
+        cal = new Calendar();
+        System.out.println(cal.getBookings());
         bkn0.setBookingId(0);
         bkn1.setBookingId(1);
         bkn0.setBookedObject(itm);
-        bkn1.setBookedObject(itm);
+        bkn1.setBookedObject(itm2);
+        itm.setId(0);
+        itm2.setId(1);
 
         date = LocalDate.now();
     }
 
     @Test
     public void addBookingValidDateTest() throws Exception {
-        bkn0.setStartDate(date);
-        bkn0.setEndDate(date.plusDays(2));
+        bkn0.setDates(date, date.plusDays(2));
 
-        bkn1.setStartDate(date.plusDays(3));
-        bkn1.setEndDate(date.plusDays(5));
+        bkn1.setDates(date, date.plusDays(5));
 
         cal.addBooking(bkn0);
         cal.addBooking(bkn1);
@@ -44,8 +47,10 @@ public class CalendarTest {
 
     @Test
     public void addBookingInvalidDateTest() throws Exception {
-        bkn0.setStartDate(null);
-        bkn0.setEndDate(null);
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            bkn0.setDates(null, null);
+        });
+       
 
         Assertions.assertThrows(NullPointerException.class, () -> {
             cal.addBooking(bkn0);
@@ -54,11 +59,9 @@ public class CalendarTest {
 
     @Test
     public void addBookingAlreadyBookedTest() throws Exception {
-        bkn0.setStartDate(date);
-        bkn0.setEndDate(date.plusDays(2));
-        
-        bkn1.setStartDate(date);
-        bkn1.setEndDate(date.plusDays(2));
+        bkn0.setDates(date, date.plusDays(2));
+        itm2.setId(0);
+        bkn1.setDates(date, date.plusDays(2));
 
         Assertions.assertThrows(IllegalStateException.class, () -> {
             cal.addBooking(bkn0);
@@ -69,12 +72,10 @@ public class CalendarTest {
     @Test
     public void removeBookingTest() throws Exception {
         bkn0.setBookedObject(itm);
-        bkn0.setStartDate(date);
-        bkn0.setEndDate(date.plusDays(2));
+        bkn0.setDates(date, date.plusDays(2));
 
         bkn1.setBookedObject(itm);
-        bkn1.setStartDate(date.plusDays(3));
-        bkn1.setEndDate(date.plusDays(5));
+        bkn1.setDates(date.plusDays(3), date.plusDays(5));
 
         cal.addBooking(bkn0);
         cal.addBooking(bkn1);
