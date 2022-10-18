@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class UserTest {
 
- /*  private User usr = null;
+  private User usr = null;
 
   @Before
   public void init() {
@@ -46,5 +46,5 @@ public class UserTest {
     usr.removeItem(1);
 
     assertEquals(new ArrayList<Integer>(Arrays.asList(0, 993)), usr.getItems());
-  } */
+  }
 }
