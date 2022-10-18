@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -83,8 +84,61 @@ public class FamController {
         updateItemView();
         updateBookingView();
         //Reads from file and adds bookings to calendar
+        // listenToItemView();
+        listenToItemView();
+      
         
     }
+    
+    private void setDayCellFactories(List<LocalDate> bookedDates){
+        startDate.setDayCellFactory(param -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty ){
+                super.updateItem(date, empty);
+
+                for (LocalDate localDate : bookedDates) {
+                    if(date.equals(localDate)){
+                        setDisable(true);
+                        setStyle("-fx-background-color: #ffc0cb;");
+                    }
+                }
+                
+            }});
+
+            endDate.setDayCellFactory(param -> new DateCell() {
+                @Override
+                public void updateItem(LocalDate date, boolean empty ){
+                    super.updateItem(date, empty);
+    
+                    for (LocalDate localDate : bookedDates) {
+                        if(date.equals(localDate)){
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }
+                    }
+                    
+                }});
+    }
+    
+
+    public void listenToItemView(){
+        itemView.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            updateDisabledDates(newValue);
+        });
+    }
+
+    private void updateDisabledDates(String value){
+        List<LocalDate> allBookedDates = new ArrayList<>();
+            for (Booking booking : calendar.getBookings()) {
+                if(booking.getBookedObject().getName().equals(value)){
+                    allBookedDates.addAll(booking.getAllDates());
+                }
+            }
+            setDayCellFactories(allBookedDates);
+    }
+    
+
+
 
     public void updateItemView() {
         itemView.getItems().clear();
@@ -122,6 +176,7 @@ public class FamController {
 
             calendar.addBooking(newBooking);
             updateBookingView();
+            updateDisabledDates(itemObjectList.get(i).getName());
 
         } catch (Exception e) {
             exceptionText.setText(e.getMessage());
