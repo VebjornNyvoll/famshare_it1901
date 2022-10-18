@@ -16,10 +16,12 @@ public class Calendar {
     }
 
     public void addBooking(Booking booking) {
-        if (isAvailable(booking)) {
+        try {
             // Uses isAvailable() to ensure users cannot add invalid bookings.
-            bookings.add(booking);
-        } else {
+            if (isAvailable(booking)) {
+                bookings.add(booking);
+            }
+        } catch (Exception e) {
             throw new IllegalStateException("Cannot add booking as one or more of the dates are unavailable.");
         }
     }
