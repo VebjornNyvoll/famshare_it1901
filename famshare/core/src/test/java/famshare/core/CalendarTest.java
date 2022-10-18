@@ -52,7 +52,7 @@ public class CalendarTest {
         });
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void addBookingAlreadyBookedTest() throws Exception {
         bkn0.setStartDate(date);
         bkn0.setEndDate(date.plusDays(2));
