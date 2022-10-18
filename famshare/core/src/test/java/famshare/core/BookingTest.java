@@ -1,7 +1,5 @@
 package famshare.core;
 
-import static org.junit.Assert.assertSame;
-
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Assertions;
@@ -21,7 +19,7 @@ public class BookingTest {
     @Test
     public void getSetBookingIDTest() {
         booking.setBookingId(0);
-        assertSame(0, booking.getBookingId());
+        Assertions.assertEquals(0, booking.getBookingId());
     }
 
     @Test
@@ -30,7 +28,7 @@ public class BookingTest {
 
         booking.setBookedObject(item);
 
-        assertSame(item, booking.getBookedObject());
+        Assertions.assertEquals(item, booking.getBookedObject());
     }
     
     @Test
@@ -44,7 +42,7 @@ public class BookingTest {
     public void getSetBookerTest() {
         User usr = new User();
         booking.setBooker(usr);
-        assertSame(usr, booking.getBooker());
+        Assertions.assertEquals(usr, booking.getBooker());
     }
 
     @Test
