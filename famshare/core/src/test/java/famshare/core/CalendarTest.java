@@ -1,5 +1,7 @@
 package famshare.core;
 
+import static org.junit.Assert.assertSame;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -38,9 +40,7 @@ public class CalendarTest {
         bookings.add(bkn0);
         bookings.add(bkn1);
 
-        if (bookings != cal.getBookings()) {
-            throw new Exception();
-        }
+        assertSame(bookings, cal.getBookings());
     }
 
     @Test(expected = NullPointerException.class)
@@ -82,8 +82,6 @@ public class CalendarTest {
         ArrayList<Booking> bookings = new ArrayList<Booking>();
         bookings.add(bkn1);
 
-        if (bookings != cal.getBookings()) {
-            throw new Exception();
-        }
+        assertSame(bookings, cal.getBookings());
     }
 }
