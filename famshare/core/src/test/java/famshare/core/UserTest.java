@@ -1,17 +1,17 @@
 package famshare.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import java.util.Arrays;
 import java.util.ArrayList;
-import org.junit.Before;
-import org.junit.Test;
+import java.util.Arrays;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class UserTest {
 
   private User usr = null;
 
-  @Before
+  @BeforeEach
   public void init() {
     usr = new User();
   }
@@ -19,13 +19,13 @@ public class UserTest {
   @Test
   public void setAndGetNameTest() throws Exception {
     usr.setName("Ola Nordmann");
-    assertSame("Ola Nordmann", usr.getName());
+    Assertions.assertEquals("Ola Nordmann", usr.getName());
   }
 
   @Test
   public void setAndGetIdTest() throws Exception {
     usr.setId(0);
-    assertEquals(0, usr.getId());
+    Assertions.assertEquals(0, usr.getId());
   }
 
   @Test
@@ -34,7 +34,7 @@ public class UserTest {
     usr.addItem(1);
     usr.addItem(993);
 
-    assertEquals(new ArrayList<Integer>(Arrays.asList(0, 1, 993)), usr.getItems());
+    Assertions.assertEquals(new ArrayList<Integer>(Arrays.asList(0, 1, 993)), usr.getItems());
   }
 
   @Test
@@ -45,6 +45,6 @@ public class UserTest {
 
     usr.removeItem(1);
 
-    assertEquals(new ArrayList<Integer>(Arrays.asList(0, 993)), usr.getItems());
+    Assertions.assertEquals(new ArrayList<Integer>(Arrays.asList(0, 993)), usr.getItems());
   }
 }
