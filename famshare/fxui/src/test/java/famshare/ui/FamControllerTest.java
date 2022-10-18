@@ -29,8 +29,8 @@ public class FamControllerTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("FamshareTest.fxml"));
-        Parent parent = fxmlLoader.load();
+        final FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("FamshareTest.fxml"));
+        final Parent parent = fxmlLoader.load();
         this.controller = fxmlLoader.getController();
         stage.setScene(new Scene(parent));
         stage.show();
