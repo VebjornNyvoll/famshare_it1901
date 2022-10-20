@@ -29,9 +29,14 @@ public class FamController {
     private Calendar calendar;
     private List<Item> itemObjectList;
     private User dummyUser = new User();
-    private String filePath = "src/main/resources/famshare/ui/calendar.json";
+    private String filePath;
 
     public FamController() throws IOException {
+        setFilePath("src/main/resources/famshare/ui/calendar.json");
+        dummyUser.setName("Dummy User");
+    }
+
+    public void setFilePath(String filePath) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new CalendarModule());
         try {
@@ -39,7 +44,7 @@ public class FamController {
         } catch (JsonMappingException e) {
             calendar = new Calendar();
         }
-        dummyUser.setName("Dummy User");
+        this.filePath = filePath;
     }
 
     @FXML
