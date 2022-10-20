@@ -29,7 +29,7 @@ public class FamControllerTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws IOException {
-        final FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("FamshareTest.fxml"));
+        final FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("famshare.fxml"));
         final Parent parent = fxmlLoader.load();
         this.controller = fxmlLoader.getController();
         stage.setScene(new Scene(parent));
@@ -49,6 +49,10 @@ public class FamControllerTest extends ApplicationTest {
     @Test
     public void testFamController() {
         assertNotNull(this.controller);
+    }
+
+    public void book(){
+        System.out.println("lol");
     }
 
     @Test
@@ -132,4 +136,4 @@ public class FamControllerTest extends ApplicationTest {
         assertTrue(i == famBookings.length);
     }
 
-}
+ }

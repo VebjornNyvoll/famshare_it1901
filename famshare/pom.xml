@@ -91,25 +91,7 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>org.testfx</groupId>
-      <artifactId>testfx-junit5</artifactId>
-      <version>4.0.16-alpha</version>
-      <scope>test</scope>
-    </dependency>
 
-    <dependency>
-			<groupId>org.testfx</groupId>
-			<artifactId>testfx-core</artifactId>
-			<version>4.0.16-alpha</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.testfx</groupId>
-			<artifactId>testfx-junit5</artifactId>
-			<version>4.0.16-alpha</version>
-			<scope>test</scope>
-    </dependency>
 
 
             
@@ -246,7 +228,9 @@
                           
         
         <version>2.22.1</version>
-                        
+        <configuration>
+            <argLine> --add-opens famshare.ui/famshare.ui=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED</argLine>
+        </configuration>
       
       </plugin>
                     
