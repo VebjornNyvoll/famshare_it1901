@@ -47,6 +47,14 @@ public class FamController {
         this.filePath = filePath;
     }
 
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public List<Item> getItemObjectList() {
+        return new ArrayList<>(itemObjectList);
+    }
+
     @FXML
     private ListView<String> bookingView, itemView;
 

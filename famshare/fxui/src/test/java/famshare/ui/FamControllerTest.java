@@ -1,21 +1,27 @@
 package famshare.ui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.assertj.core.api.Assertions;
+import org.assertj.core.internal.bytebuddy.asm.Advice.Local;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,93 +33,88 @@ import famshare.core.Item;
 public class FamControllerTest extends ApplicationTest {
 
     private FamController controller;
-    private List<Item> famItemTestList;
-    private Calendar calendarTest = new Calendar();
+    private Calendar calendar;
     // private String testFilePath =
-    // "src/test/resources/famshare/ui/calendarTest.json";
+    // "src/test/resources/famshare/ui/calendar.json";
 
     @Override
     public void start(Stage stage) throws IOException {
         final FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("famshare.fxml"));
         final Parent parent = fxmlLoader.load();
         this.controller = fxmlLoader.getController();
+        this.calendar = this.controller.getCalendar(); // unsure about this encapsulation..
         // this.controller.setFilePath(testFilePath);
         stage.setScene(new Scene(parent));
         stage.show();
     }
 
-    // @BeforeEach
-    // public void setupFamTestItems() {
-
-    // Item cabin = new Item();
-    // cabin.setName("Cabin");
-    // cabin.setID(1);
-    // Item car = new Item();
-    // car.setName("Car");
-    // car.setID(2);
-    // Item boat = new Item();
-    // boat.setName("Boat");
-    // boat.setID(3);
-    // Item drill = new Item();
-    // drill.setName("Drill");
-    // drill.setID(4);
-    // Item bike = new Item();
-    // bike.setName("Bike");
-    // bike.setID(5);
-    // Item toolBox = new Item();
-    // toolBox.setName("Tool box");
-    // toolBox.setID(6);
-
-    // famItemTestList = new ArrayList<>(Arrays.asList(cabin, car, boat, drill,
-    // bike, toolBox));
-    // }
-
     @Test
     public void testFamController() {
         assertNotNull(this.controller);
+        assertNotNull(this.calendar);
     }
-
-    // public void book() {
-    // System.out.println("lol");
-    // }
 
     @Test
     public void testBookingView_initial() {
-        final ListView<Booking> bookingListView = lookup("#bookingView").query();
-        assertEquals(2, bookingListView.getItems().size());
+        checkNumOfBookings(calendar.getBookings().size());
     }
 
     @Test
     public void testItemView_initial() {
         // initial famshare items
         final ListView<String> itemListView = lookup("#itemView").query();
-        assertEquals(6, itemListView.getItems().size());
+        assertEquals(itemListView.getItems().size(), controller.getItemObjectList().size());
         assertEquals("Cabin", itemListView.getItems().get(0));
         assertEquals("Tool box", itemListView.getItems().get(5));
+    }
 
-        // checkFamItemListView(famItemTestList);
+    // booking without dates; exception in UI
+    @Test
+    public void testBookWithoutDates() {
+        final ListView<String> itemListView = lookup("#itemView").query();
+        itemListView.getSelectionModel().select(0); // select item
+        clickOn("#bookItemButton");
+        assertNotNull(getExceptionText()); // should assertThrows
+        checkNumOfBookings(2);
+
     }
 
     @Test
-    public void testBookItem() {
+    public void testBookWithInvalidDates() {
+        final ListView<String> itemListView = lookup("#itemView").query();
+        itemListView.getSelectionModel().select(0); // select item
+        clickOn("#startDate");
+        write("21.12.2022");
+        clickOn("#endDate");
+        write("15.12.2022");
+        clickOn("#bookItemButton");
+    }
+
+    // booking with dates
+    @Test
+    public void testBookWithDates() {
         final ListView<String> itemListView = lookup("#itemView").query();
         itemListView.getSelectionModel().select(0); // select item
 
-        // booking without dates; exception in UI
-        clickOn("#bookItemButton");
+        // javafx.scene.control.DatePicker startDate = lookup("#startDate");
+        // javafx.scene.control.DatePicker endDate = lookup("#endDate");
 
-        assertNotNull(getExceptionText());
-        checkNumOfBookings(2);
+        // try {
+        // startDate.setValue(LocalDate.of(2022, 12, 21));
+        // endDate.setValue(LocalDate.of(2022, 12, 26));
 
-        // booking with dates
+        // } catch (IllegalArgumentException | NullPointerException e) {
+        // e.printStackTrace();
+        // }
+
         clickOn("#startDate");
         write("21.12.2022");
         clickOn("#endDate");
         write("26.12.2022");
-        itemListView.getSelectionModel().select(0); // select item
-        clickOn("#bookItemButton");
 
+        clickOn("#bookItemButton");
         // assertEquals("", getExceptionText());
+        final ListView<Booking> bookingListView = lookup("#bookingView").query();
 
     }
 
@@ -126,56 +127,12 @@ public class FamControllerTest extends ApplicationTest {
         assertEquals(expected, bookingListView.getItems().size());
     }
 
-    // check listView
-    public void checkFamItemListView(Item... items) {
-        final ListView<Item> itemListView = lookup("#itemView").query();
-        checkItems(itemListView.getItems(), items);
-    }
-
-    public void checkFamBookingsListView(Booking... bookings) {
-        final ListView<Booking> bookingListView = lookup("#bookingView").query();
-        checkBookings(bookingListView.getItems(), bookings);
-    }
-
-    // check items
-    private void checkItem(Item item, String itemName, Integer id) {
-        if (itemName != null) {
-            assertEquals(itemName, item.getName());
+    public List<String> getBookingItemNames(List<Booking> bookings) {
+        List<String> bookingItemNames = new ArrayList<>();
+        for (Booking b : bookings) {
+            bookingItemNames.add(b.getBookedObject().getName());
         }
-        if (id != null) {
-            assertEquals((int) id, item.getID());
-        }
-    }
-
-    private void checkItems(Iterable<Item> items, Item... famItems) {
-        int i = 0;
-        for (Item item : items) {
-            assertTrue(i < famItems.length);
-            checkItem(item, item.getName(), item.getID());
-            i++;
-        }
-        assertTrue(i == famItems.length);
-    }
-
-    // check bookings
-    private void checkBooking(Booking booking, Boolean validDate, Integer id) {
-        if (validDate != null) {
-            assertEquals(validDate,
-                    booking.getStartDate().isBefore(booking.getEndDate()));
-        }
-        if (id != null) {
-            assertEquals((int) id, booking.getBookingId());
-        }
-    }
-
-    private void checkBookings(Iterable<Booking> bookings, Booking... famBookings) {
-        int i = 0;
-        for (Booking booking : bookings) {
-            assertTrue(i < famBookings.length);
-            checkBooking(booking, true, booking.getBookingId());
-            i++;
-        }
-        assertTrue(i == famBookings.length);
+        return bookingItemNames;
     }
 
 }
