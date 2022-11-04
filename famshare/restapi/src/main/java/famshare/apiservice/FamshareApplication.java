@@ -1,4 +1,4 @@
-package gr2260.famshare.famshare;
+package famshare.apiservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
