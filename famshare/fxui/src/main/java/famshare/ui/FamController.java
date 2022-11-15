@@ -1,7 +1,5 @@
 package famshare.ui;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,6 +27,7 @@ import famshare.json.*;
 
 public class FamController {
 
+    
     private Calendar calendar;
     private List<Item> itemObjectList;
     private User dummyUser = new User();
@@ -36,46 +35,7 @@ public class FamController {
     private String calendarAsString = "your calendar is empty";
 
     public FamController() throws IOException {
-        setFilePath("src/main/resources/famshare/ui/calendar.json");
         dummyUser.setName("Dummy User");
-    }
-
-    public void setFilePath(String filePath) throws IOException {
-        try {
-            HTTPCaller httpCaller = new HTTPCaller();
-            Calendar testCalendar = new Calendar();
-            Item testItem = new Item();
-            testItem.setId(1);
-            testItem.setName("testItemName");
-            testItem.setDescription("really a description");
-            User testUser = new User();
-            testUser.setId(101);
-            testUser.setName("testUserName");
-            Booking testBooking = new Booking();
-            testBooking.setBookedObject(testItem);
-            testBooking.setBooker(testUser);
-            testBooking.setBookingId(1001);
-            testBooking.setDates(LocalDate.now(), LocalDate.now().plusDays(1));
-            testCalendar.addBooking(testBooking);
-            this.calendar = testCalendar;
-            // calendar = new Calendar();
-            // Unirest.get("http://localhost:8081/calendar").asObject(new GenericType<List<Booking>>() {
-            // }).getBody().forEach(booking -> calendar.addBooking(booking));
-            // if(calendar == null) {
-            //     calendarAsString = "calendar is null";
-            //     throw new IOException("Calendar from httpCaller is null");
-
-            // } else {
-            //     calendarAsString = calendar.toString();
-            // }
-           
-            httpCaller.postCalendarToAPI(testCalendar);
-            this.filePath = filePath;
-          
-        } catch (Exception e) {
-            calendar = new Calendar();
-        }
-        this.filePath = filePath;
     }
 
     public Calendar getCalendar() {
@@ -126,12 +86,16 @@ public class FamController {
     }
 
     @FXML
-    void initialize() throws FileNotFoundException {
+    void initialize() throws IOException {
         setDummyItems();
+        // Load calendar from file if there is one
+        try {
+            calendar = persistance.readCalendar(filePath);  
+        } catch (IOException e) {
+            calendar = new Calendar();
+        }
         updateItemView();
         updateBookingView();
-        // Reads from file and adds bookings to calendar
-        // listenToItemView();
         listenToItemView();
         description.setPromptText(calendarAsString);
         
@@ -143,7 +107,6 @@ public class FamController {
             @Override
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-
                 for (LocalDate localDate : bookedDates) {
                     if (date.equals(localDate)) {
                         setDisable(true);
@@ -200,10 +163,8 @@ public class FamController {
             bookingView.getItems().add(booking.toString());
         }
         // Adds bookings in bookingview to json file
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new CalendarModule());
         try {
-            mapper.writeValue(new File(filePath), calendar);
+            persistance.writeCalendar(calendar, filePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -219,11 +180,9 @@ public class FamController {
             LocalDate startD = startDate.getValue();
             LocalDate endD = endDate.getValue();
             Booking newBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD, 10);// temp dummy id
-
             calendar.addBooking(newBooking);
             updateBookingView();
             updateDisabledDates(itemObjectList.get(i).getName());
-
         } catch (Exception e) {
             exceptionText.setText(e.getMessage());
         }
