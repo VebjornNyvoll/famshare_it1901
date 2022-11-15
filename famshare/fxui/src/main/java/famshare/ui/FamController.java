@@ -25,7 +25,7 @@ public class FamController {
     private List<Item> itemObjectList;
     private User dummyUser = new User();
     private String filePath = "src/main/resources/famshare/ui/calendar.json";
-    private Persistance persistance = new Persistance();
+    private CalendarPersistance persistance = new CalendarPersistance();
    
 
     public FamController() throws IOException {

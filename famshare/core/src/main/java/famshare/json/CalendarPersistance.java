@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import famshare.core.Calendar;
 
-public class Persistance {
+public class CalendarPersistance {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    public Persistance () {
+    public CalendarPersistance () {
         mapper.registerModule(new CalendarModule());
     }
 
