@@ -26,7 +26,7 @@ public class HTTPCaller {
         Unirest.post("http://localhost:8081/calendar")
         .header("Content-Type", "application/json")
         .body(calendar)
-        .asEmpty();
+        .asJson();
     }
 
     public String getStringFromAPI(){
