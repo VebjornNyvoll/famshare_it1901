@@ -32,6 +32,7 @@ public class FamController {
     private List<Item> itemObjectList;
     private User dummyUser = new User();
     private String filePath;
+    private HTTPCaller httpCaller = new HTTPCaller();
     private String calendarAsString = "your calendar is empty";
 
     public FamController() throws IOException {
@@ -89,15 +90,11 @@ public class FamController {
     void initialize() throws IOException {
         setDummyItems();
         // Load calendar from file if there is one
-        try {
-            calendar = persistance.readCalendar(filePath);  
-        } catch (IOException e) {
-            calendar = new Calendar();
-        }
+        calendar = httpCaller.getCalendarFromAPI();
         updateItemView();
         updateBookingView();
         listenToItemView();
-        description.setPromptText(calendarAsString);
+        
         
 
     }
@@ -162,12 +159,7 @@ public class FamController {
         for (Booking booking : calendar.getBookings()) {
             bookingView.getItems().add(booking.toString());
         }
-        // Adds bookings in bookingview to json file
-        try {
-            persistance.writeCalendar(calendar, filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        
 
     }
 
@@ -181,6 +173,7 @@ public class FamController {
             LocalDate endD = endDate.getValue();
             Booking newBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD, 10);// temp dummy id
             calendar.addBooking(newBooking);
+            httpCaller.postBookingToAPI(newBooking);
             updateBookingView();
             updateDisabledDates(itemObjectList.get(i).getName());
         } catch (Exception e) {
