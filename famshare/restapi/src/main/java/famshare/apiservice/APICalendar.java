@@ -18,6 +18,12 @@ public class APICalendar {
     private Calendar calendar;
     private final long id;
 
+    public void writeCalendar(String filePath, Calendar postedCalendar) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new CalendarModule());
+        this.calendar = postedCalendar;
+        mapper.writeValue(new File(filePath), calendar);
+    }
 
     public void setFilePath(String filePath) throws IOException {
         ObjectMapper mapper = new ObjectMapper();

@@ -47,4 +47,9 @@ public class Calendar {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "x";
+    }
+
 }

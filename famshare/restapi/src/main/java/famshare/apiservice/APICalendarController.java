@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +22,17 @@ import famshare.core.User;
 @RestController
 public class APICalendarController {
     private final AtomicLong counter = new AtomicLong();
+
+    @GetMapping("/testfunction")
+    public String testfunction(@RequestParam(value = "name", defaultValue = "World") String name) {
+        return String.format("Hello %s!", name);
+    }
+
+    @PostMapping("/calendar")
+    public void createCalendar(@RequestBody Calendar calendar) throws IOException {
+        APICalendar apiCalendar = new APICalendar(counter.incrementAndGet(), "src/main/resources/calendar.json");
+        apiCalendar.writeCalendar("src/main/resources/calendar.json", calendar);
+    }
 
     @GetMapping("/calendar")
     public Calendar calendar(@RequestParam(value = "name", defaultValue = "World") String name) {
