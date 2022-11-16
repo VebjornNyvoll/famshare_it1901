@@ -35,6 +35,10 @@ public class APICalendarService {
     persistence.writeCalendar(Calendar, filePath);
     return true;
   }
+
+  protected Booking getBooking(int id) throws IOException {
+    return Calendar.getBooking(id);
+  }
 }
 
 

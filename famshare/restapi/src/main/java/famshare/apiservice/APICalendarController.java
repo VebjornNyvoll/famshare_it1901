@@ -39,6 +39,13 @@ public class APICalendarController {
     return true;
   }
 
+  //Get individual booking to /calendar/{id}
+  @GetMapping("/{id}")
+  protected Booking getBooking(@PathVariable("id") int id) throws IOException {
+    return APICalendar.getBooking(id);
+  }
+  
+
   @DeleteMapping(path = "/{id}")
   protected boolean removeBooking(@PathVariable("id") int id) throws IOException {
     APICalendar.removeBooking(id);
