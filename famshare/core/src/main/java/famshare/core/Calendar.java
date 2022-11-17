@@ -11,8 +11,25 @@ public class Calendar {
         bookings = new ArrayList<>();
     }
 
+    public Booking getBooking(int id) {
+        // Returns a booking object with the given id.
+        for (Booking b : bookings) {
+            if (b.getBookingId() == id) {
+                return b;
+            }
+        }
+        return null;
+    }
+
     public void removeBooking(int bookingId) {
-        bookings.remove(bookingId);
+        for (Booking booking : bookings) {
+            if(booking.getBookingId() == bookingId) {
+                System.out.println(booking);
+                bookings.remove(booking);
+                System.out.println(bookings);
+                return;
+            }
+        }
     }
 
     public void addBooking(Booking booking) {
@@ -47,9 +64,6 @@ public class Calendar {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "x";
-    }
+   
 
 }

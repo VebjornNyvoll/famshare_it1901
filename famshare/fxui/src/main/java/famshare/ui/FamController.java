@@ -57,7 +57,7 @@ public class FamController {
     private Text exceptionText;
 
     @FXML
-    private Button bookButton;
+    private Button bookButton, deleteButton;
 
     @FXML
     private TextField description;
@@ -176,6 +176,20 @@ public class FamController {
             httpCaller.postBookingToAPI(newBooking);
             updateBookingView();
             updateDisabledDates(itemObjectList.get(i).getName());
+        } catch (Exception e) {
+            exceptionText.setText(e.getMessage());
+        }
+    }
+
+    @FXML
+    void delete() {
+        try {
+            int i = bookingView.getSelectionModel().getSelectedIndex();
+            int bookingId = Integer.parseInt(bookingView.getItems().get(i).split("bookingId:")[1]);
+            exceptionText.setText(i + " " + bookingId);
+            calendar.removeBooking(bookingId);
+            httpCaller.deleteBooking(bookingId);
+            updateBookingView();
         } catch (Exception e) {
             exceptionText.setText(e.getMessage());
         }

@@ -58,6 +58,10 @@ public class CalendarDeserializer extends StdDeserializer<Calendar> {
             String endDate = endDateNode.asText();
             LocalDate end = LocalDate.parse(endDate);
             b.setDates(start, end);
+
+            // Gets the bookingId from json
+            String bookingId = booking.get("bookingId").asText();
+            b.setBookingId(Integer.parseInt(bookingId));
             Calendar.addBooking(b);
         }
         return Calendar;
