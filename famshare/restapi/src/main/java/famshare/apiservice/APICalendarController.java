@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import famshare.core.Booking;
 import famshare.core.Calendar;
+import kong.unirest.json.JSONObject;
+
 
 @RestController
 @RequestMapping(APICalendarController.CONTROLLER_PATH)
@@ -33,15 +37,30 @@ public class APICalendarController {
     return APICalendar.getCalendar();
   }
 
-  @PostMapping
-  protected boolean addBooking(@RequestBody Booking Booking) throws IOException {
-    APICalendar.addBooking(Booking);
+  @PostMapping(consumes = "text/plain")
+  protected boolean addBooking(@RequestBody String bookingAsJsonString) throws IOException {
+    ObjectMapper objMapper = new ObjectMapper();
+    try {
+      Booking booking = objMapper.readValue(bookingAsJsonString, Booking.class);
+      APICalendar.addBooking(booking);
+    } catch (Exception e) {
+      System.out.println("Posted booking is on invalid format: " + e.getMessage() + " " + bookingAsJsonString);
+      return false;
+    }
     return true;
   }
 
   @DeleteMapping(path = "/{id}")
   protected boolean removeBooking(@PathVariable("id") int id) throws IOException {
+    System.out.println("Before: " + APICalendar.getCalendar().getBookings().size());
+    System.out.println("Deleting booking with id: " + id);
+    System.out.println("After: " + APICalendar.getCalendar().getBookings().size());
     APICalendar.removeBooking(id);
     return true;
+  }
+
+  @GetMapping(path = "/{id}")
+  protected Booking getBooking(@PathVariable("id") int id) throws IOException {
+    return APICalendar.getCalendar().getBooking(id);
   }
 }
