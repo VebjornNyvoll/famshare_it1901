@@ -29,7 +29,7 @@ public class FamController {
 
     
     private Calendar calendar;
-    private List<Item> itemObjectList;
+    private ItemList itemList = new ItemList();
     private User dummyUser = new User();
     private String filePath;
     private HTTPCaller httpCaller = new HTTPCaller();
@@ -43,8 +43,8 @@ public class FamController {
         return calendar;
     }
 
-    public List<Item> getItemObjectList() {
-        return new ArrayList<>(itemObjectList);
+    public ItemList getItemObjectList() {
+        return itemList;
     }
 
     @FXML
@@ -61,6 +61,12 @@ public class FamController {
 
     @FXML
     private TextField description;
+
+    @FXML
+    private TextField itemname;
+
+    @FXML
+    private Button addItemButton;
 
     public void setDummyItems() { // will load itemView from external file later
 
@@ -82,21 +88,25 @@ public class FamController {
         Item toolBox = new Item();
         toolBox.setName("Tool box");
         toolBox.setId(6);
-
-        itemObjectList = new ArrayList<>(Arrays.asList(cabin, car, boat, drill, bike, toolBox));
+        
+        ItemList itemList = new ItemList();
+        itemList.addItem(toolBox);
+        itemList.addItem(bike);
+        itemList.addItem(drill);
+        itemList.addItem(boat);
+        itemList.addItem(car);
+       
+       
     }
 
     @FXML
     void initialize() throws IOException {
-        setDummyItems();
         // Load calendar from file if there is one
         calendar = httpCaller.getCalendarFromAPI();
         updateItemView();
-        updateBookingView();
+        updateBookingView(); 
+        updateBookingView(); 
         listenToItemView();
-        
-        
-
     }
 
     private void setDayCellFactories(List<LocalDate> bookedDates) {
@@ -110,7 +120,6 @@ public class FamController {
                         setStyle("-fx-background-color: #ffc0cb;");
                     }
                 }
-
             }
         });
 
@@ -118,7 +127,6 @@ public class FamController {
             @Override
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-
                 for (LocalDate localDate : bookedDates) {
                     if (date.equals(localDate)) {
                         setDisable(true);
@@ -149,8 +157,8 @@ public class FamController {
 
     public void updateItemView() {
         itemView.getItems().clear();
-        for (int i = 0; i < itemObjectList.size(); i++) {
-            itemView.getItems().add(i, itemObjectList.get(i).getName());
+        for (Item item : itemList.getItems()) {
+            itemView.getItems().add(item.getName());
         }
     }
 
@@ -159,8 +167,13 @@ public class FamController {
         for (Booking booking : calendar.getBookings()) {
             bookingView.getItems().add(booking.toString());
         }
-        
-
+    }
+    @FXML
+    public void additem() throws IOException {
+        Item item = new Item();
+        item.setName(itemname.getText());
+        itemList.addItem(item);
+        updateItemView();
     }
 
     @FXML
@@ -171,11 +184,11 @@ public class FamController {
             int i = itemView.getSelectionModel().getSelectedIndex();
             LocalDate startD = startDate.getValue();
             LocalDate endD = endDate.getValue();
-            Booking newBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD, 10);// temp dummy id
+            Booking newBooking = new Booking(itemList.get(i), dummyUser, startD, endD, 10);// temp dummy id
             calendar.addBooking(newBooking);
             httpCaller.postBookingToAPI(newBooking);
             updateBookingView();
-            updateDisabledDates(itemObjectList.get(i).getName());
+            updateDisabledDates(itemList.get(i).getName());
         } catch (Exception e) {
             exceptionText.setText(e.getMessage());
         }
