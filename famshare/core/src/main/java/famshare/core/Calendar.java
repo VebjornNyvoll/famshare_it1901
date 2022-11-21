@@ -6,6 +6,7 @@ public class Calendar {
     // Class responsible for holding booking objects and performing operations on
     // those objects.
     private ArrayList<Booking> bookings;
+    private ItemList itemList;
 
     public Calendar() {
         bookings = new ArrayList<>();
@@ -64,6 +65,14 @@ public class Calendar {
         return true;
     }
 
-   
 
+    //Gets itemlist from calendar
+    public ItemList getItemList() {
+        return this.itemList;
+    }
+
+    //Sets itemlist in calendar
+    public void setItemList(ItemList itemList) {
+        this.itemList = itemList;
+    }
 }
