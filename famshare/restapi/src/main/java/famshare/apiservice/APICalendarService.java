@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import famshare.core.Booking;
 import famshare.core.Calendar;
-import famshare.json.*;
+import famshare.jsoncore.*;
 
 import org.springframework.stereotype.Service;
 

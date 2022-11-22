@@ -8,11 +8,13 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import famshare.core.Booking;
 import famshare.core.Calendar;
 import famshare.core.Item;
 import famshare.core.User;
+
 
 public class CalendarDeserializer extends StdDeserializer<Calendar> {
     
@@ -29,10 +31,12 @@ public class CalendarDeserializer extends StdDeserializer<Calendar> {
         Calendar Calendar = new Calendar();
         ObjectCodec codec = parser.getCodec();
         JsonNode node = codec.readTree(parser);
-
+        ArrayNode bookingsNode = (ArrayNode) node.get("calendar");
+        
+        
         //Gets the booking objects from json
-        JsonNode bookingNode = node.get("calendar");
-        for (JsonNode booking : bookingNode) {
+        
+        for (JsonNode booking : bookingsNode) {
             //Gets the booking object from json and adds it to the calendar
             Booking b = new Booking();
             //Gets the user object from json

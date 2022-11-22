@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import famshare.core.Booking;
@@ -19,7 +20,7 @@ import java.time.Duration;
 
 
 public class HTTPCaller {
-    public void getCalendarFromAPI() {
+    public Calendar getCalendarFromAPI() {
         HttpClient httpClient = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_2)
                 .connectTimeout(Duration.ofSeconds(10))
@@ -31,18 +32,55 @@ public class HTTPCaller {
                     .uri(URI.create("http://localhost:8081/calendar"))
                     .build();
                     HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+                    Calendar calendar = new ObjectMapper().readValue(response.body(), Calendar.class);
+                    System.out.println(calendar);
+                    return calendar;
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return null;
+                }
+    }
+    
+    public void postBookingToAPI(Booking booking) {
+        int bookingId = booking.getBookingId();
+        String url = "http://localhost:8081/calendar/" + bookingId;
+        HttpClient httpClient = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_2)
+                .connectTimeout(Duration.ofSeconds(10))
+                .build();
+
+                try {
+                    HttpRequest request = HttpRequest.newBuilder()
+                    .POST(HttpRequest.BodyPublishers.ofString(new ObjectMapper().writeValueAsString(booking)))
+                    .uri(URI.create(url))
+                    .build();
+                    HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
                     System.out.println(response.body());
                     
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-       
     }
 
-    public static void main(String[] args) {
-        HTTPCaller caller = new HTTPCaller();
-        caller.getCalendarFromAPI();
-    }
+    public void deleteBookingFromAPI(int bookingId) {
+        String url = "http://localhost:8081/calendar/" + bookingId;
+        HttpClient httpClient = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_2)
+                .connectTimeout(Duration.ofSeconds(10))
+                .build();
 
+                try {
+                    HttpRequest request = HttpRequest.newBuilder()
+                    .DELETE()
+                    .uri(URI.create(url))
+                    .build();
+                    HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+                    System.out.println(response.body());
+                    
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+    }
 
 }

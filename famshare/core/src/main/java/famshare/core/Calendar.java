@@ -2,6 +2,11 @@ package famshare.core;
 
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import famshare.jsoncore.CalendarDeserializer;
+
+@JsonDeserialize(using = CalendarDeserializer.class)
 public class Calendar {
     // Class responsible for holding booking objects and performing operations on
     // those objects.

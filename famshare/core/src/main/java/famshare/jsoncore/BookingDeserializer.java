@@ -1,4 +1,4 @@
-package famshare.json;
+package famshare.jsoncore;
 
 import java.io.IOException;
 import java.time.LocalDate;
