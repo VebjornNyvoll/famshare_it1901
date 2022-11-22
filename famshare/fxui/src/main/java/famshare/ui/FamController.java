@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import famshare.core.*;
-import famshare.jsoncore.CalendarPersistance;
+import famshare.jsoncore.*;
 
 public class FamController {
 
@@ -26,6 +26,7 @@ public class FamController {
     private User dummyUser = new User();
     private String filePath = "src/main/resources/famshare/ui/calendar.json";
     private CalendarPersistance persistance = new CalendarPersistance();
+    private int nextBookingId = 0;
    
 
     public FamController() throws IOException {
@@ -85,6 +86,9 @@ public class FamController {
         // Load calendar from file if there is one
         try {
             calendar = persistance.readCalendar(filePath);  
+            for (Booking b : calendar.getBookings()) {
+                nextBookingId++;
+            }
         } catch (IOException e) {
             calendar = new Calendar();
         }
@@ -155,11 +159,11 @@ public class FamController {
             bookingView.getItems().add(booking.toString());
         }
         // Adds bookings in bookingview to json file
-        try {
-            persistance.writeCalendar(calendar, filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // try {
+        //     persistance.writeCalendar(calendar, filePath);
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
 
     }
 
@@ -171,8 +175,11 @@ public class FamController {
             int i = itemView.getSelectionModel().getSelectedIndex();
             LocalDate startD = startDate.getValue();
             LocalDate endD = endDate.getValue();
-            Booking newBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD, 10);// temp dummy id
+            Booking newBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD, nextBookingId);
+            nextBookingId++;
             calendar.addBooking(newBooking);
+            HTTPCaller httpCaller = new HTTPCaller();
+            httpCaller.postBookingToAPI(newBooking);
             updateBookingView();
             updateDisabledDates(itemObjectList.get(i).getName());
         } catch (Exception e) {
