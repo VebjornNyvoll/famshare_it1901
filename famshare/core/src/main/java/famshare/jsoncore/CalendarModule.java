@@ -1,4 +1,4 @@
-package famshare.json;
+package famshare.jsoncore;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
