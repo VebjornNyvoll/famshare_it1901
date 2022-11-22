@@ -19,11 +19,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import famshare.core.Booking;
-import kong.unirest.GenericType;
-import kong.unirest.Unirest;
+
 
 import famshare.core.*;
-import famshare.json.*;
+import famshare.jsoncore.*;
 
 public class FamController {
 
@@ -161,7 +160,7 @@ public class FamController {
             int bookingId = Integer.parseInt(bookingView.getItems().get(i).split("bookingId:")[1]);
             exceptionText.setText(i + " " + bookingId);
             calendar.removeBooking(bookingId);
-            httpCaller.deleteBooking(bookingId);
+            httpCaller.deleteBookingFromAPI(bookingId);
             updateBookingView();
         } catch (Exception e) {
             exceptionText.setText(e.getMessage());

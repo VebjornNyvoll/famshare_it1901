@@ -1,4 +1,4 @@
-package famshare.json;
+package famshare.jsoncore;
 
 import java.io.File;
 import java.io.IOException;

@@ -9,8 +9,8 @@ import java.util.stream.Stream;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import famshare.json.BookingDeserializer;
-import famshare.json.BookingSerializer;
+import famshare.jsoncore.BookingDeserializer;
+import famshare.jsoncore.BookingSerializer;
 
 
 @JsonSerialize(using=BookingSerializer.class)
