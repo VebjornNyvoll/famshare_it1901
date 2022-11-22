@@ -1,15 +1,10 @@
 package famshare.ui;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -25,25 +20,16 @@ import famshare.json.*;
 
 public class FamController {
 
+    
     private Calendar calendar;
     private List<Item> itemObjectList;
     private User dummyUser = new User();
-    private String filePath;
+    private String filePath = "src/main/resources/famshare/ui/calendar.json";
+    private Persistance persistance = new Persistance();
+   
 
     public FamController() throws IOException {
-        setFilePath("src/main/resources/famshare/ui/calendar.json");
         dummyUser.setName("Dummy User");
-    }
-
-    public void setFilePath(String filePath) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new CalendarModule());
-        try {
-            calendar = mapper.readValue(new File(filePath), Calendar.class);
-        } catch (JsonMappingException e) {
-            calendar = new Calendar();
-        }
-        this.filePath = filePath;
     }
 
     public Calendar getCalendar() {
@@ -94,14 +80,18 @@ public class FamController {
     }
 
     @FXML
-    void initialize() throws FileNotFoundException {
+    void initialize() throws IOException {
         setDummyItems();
+        // Load calendar from file if there is one
+        try {
+            calendar = persistance.readCalendar(filePath);  
+        } catch (IOException e) {
+            calendar = new Calendar();
+        }
         updateItemView();
         updateBookingView();
-        // Reads from file and adds bookings to calendar
-        // listenToItemView();
         listenToItemView();
-
+        
     }
 
     private void setDayCellFactories(List<LocalDate> bookedDates) {
@@ -109,7 +99,6 @@ public class FamController {
             @Override
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-
                 for (LocalDate localDate : bookedDates) {
                     if (date.equals(localDate)) {
                         setDisable(true);
@@ -166,10 +155,8 @@ public class FamController {
             bookingView.getItems().add(booking.toString());
         }
         // Adds bookings in bookingview to json file
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new CalendarModule());
         try {
-            mapper.writeValue(new File(filePath), calendar);
+            persistance.writeCalendar(calendar, filePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -185,11 +172,9 @@ public class FamController {
             LocalDate startD = startDate.getValue();
             LocalDate endD = endDate.getValue();
             Booking newBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD, 10);// temp dummy id
-
             calendar.addBooking(newBooking);
             updateBookingView();
             updateDisabledDates(itemObjectList.get(i).getName());
-
         } catch (Exception e) {
             exceptionText.setText(e.getMessage());
         }
