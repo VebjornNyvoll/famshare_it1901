@@ -6,15 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import famshare.json.BookingDeserializer;
-import famshare.json.BookingSerializer;
-
-
-@JsonSerialize(using=BookingSerializer.class)
-@JsonDeserialize(using=BookingDeserializer.class)
 public class Booking {
     // Class responsible for holding start and end date of a booking, as well as
     // which user created said booking.
@@ -69,14 +60,14 @@ public class Booking {
 
     // Ensures that the startDate is not before the current date by checking users
     // localtime.
-    private void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDate startDate) {
         if (startDate.isBefore(LocalDate.now())) {
-            // throw new IllegalStateException("Can't book dates that have passed!");
+            throw new IllegalStateException("Can't book dates that have passed!");
         }
         this.startDate = startDate;
     }
 
-    private void setEndDate(LocalDate endDate) {
+    public void setEndDate(LocalDate endDate) {
         if (this.startDate == null || endDate.isBefore(startDate)) {
             throw new IllegalStateException(
                     "endDate must be set after startDate and must be a date equal to or later than startDate");
@@ -101,9 +92,6 @@ public class Booking {
     }
 
     public List<LocalDate> getAllDates() {
-        if (this.allDates == null) {
-            throw new IllegalStateException(this.toString() + " has no dates");
-        }
         List<LocalDate> allDatesCopy = new ArrayList<>(allDates);
         return allDatesCopy;
     }
@@ -111,7 +99,7 @@ public class Booking {
     @Override
     public String toString() {
         return bookedObject.getName() + "; " + booker.getName() + "; " + getStartDate() + " - "
-                + getEndDate() + " bookingId:" + bookingId;
+                + getEndDate();
     }
 
 }

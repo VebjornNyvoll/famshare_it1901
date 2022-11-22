@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import famshare.core.Calendar;
-import famshare.core.ItemList;
 
 public class CalendarPersistance {
 
@@ -22,10 +21,5 @@ public class CalendarPersistance {
     public Calendar readCalendar (String filepath) throws IOException {
         return mapper.readValue(new File(filepath), Calendar.class);
     }
-
-    //Reads from file and gets items from calendar
-    public ItemList readItemList (String filepath) throws IOException {
-        Calendar calendar = mapper.readValue(new File(filepath), Calendar.class);
-        return calendar.getItemList();
-    }
+    
 }

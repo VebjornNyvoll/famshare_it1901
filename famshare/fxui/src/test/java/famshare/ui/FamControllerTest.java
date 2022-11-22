@@ -34,8 +34,8 @@
 
 //     private FamController controller;
 //     private Calendar calendar;
-//     private String testFilePath =
-//     "src/test/resources/famshare/ui/calendar.json";
+//     // private String testFilePath =
+//     // "src/test/resources/famshare/ui/calendar.json";
 
 //     @Override
 //     public void start(Stage stage) throws IOException {
@@ -43,7 +43,7 @@
 //         final Parent parent = fxmlLoader.load();
 //         this.controller = fxmlLoader.getController();
 //         this.calendar = this.controller.getCalendar(); // unsure about this encapsulation..
-//         this.controller.setFilePath(testFilePath);
+//         // this.controller.setFilePath(testFilePath);
 //         stage.setScene(new Scene(parent));
 //         stage.show();
 //     }
@@ -96,16 +96,16 @@
 //         final ListView<String> itemListView = lookup("#itemView").query();
 //         itemListView.getSelectionModel().select(0); // select item
 
-//         javafx.scene.control.DatePicker startDate = lookup("#startDate");
-//         javafx.scene.control.DatePicker endDate = lookup("#endDate");
+//         // javafx.scene.control.DatePicker startDate = lookup("#startDate");
+//         // javafx.scene.control.DatePicker endDate = lookup("#endDate");
 
-//         try {
-//         startDate.setValue(LocalDate.of(2022, 12, 21));
-//         endDate.setValue(LocalDate.of(2022, 12, 26));
+//         // try {
+//         // startDate.setValue(LocalDate.of(2022, 12, 21));
+//         // endDate.setValue(LocalDate.of(2022, 12, 26));
 
-//         } catch (IllegalArgumentException | NullPointerException e) {
-//         e.printStackTrace();
-//         }
+//         // } catch (IllegalArgumentException | NullPointerException e) {
+//         // e.printStackTrace();
+//         // }
 
 //         clickOn("#startDate");
 //         write("21.12.2022");
@@ -113,7 +113,7 @@
 //         write("26.12.2022");
 
 //         clickOn("#bookItemButton");
-//         assertEquals("", getExceptionText());
+//         // assertEquals("", getExceptionText());
 //         final ListView<Booking> bookingListView = lookup("#bookingView").query();
 
 //     }

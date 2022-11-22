@@ -25,7 +25,6 @@ public class CalendarSerializer extends StdSerializer<Calendar> {
     jsonGen.writeStartObject();
     //Writes the calendar object
     jsonGen.writeObjectField("calendar", Calendar.getBookings());
-    jsonGen.writeObjectField("itemlist", Calendar.getItemList());
     jsonGen.writeEndObject();
   }
 
