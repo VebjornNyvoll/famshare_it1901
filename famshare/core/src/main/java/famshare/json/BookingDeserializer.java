@@ -42,7 +42,7 @@ public class BookingDeserializer extends StdDeserializer<Booking> {
         Item item = new Item();
         item.setName(itemNode.get("name").asText());
         item.setDescription(itemNode.get("description").asText());
-        item.setId(itemNode.get("id").asInt());
+        item.setId(itemNode.get("itemID").asInt());
         Booking.setBookedObject(item);
 
         //Gets the date from json
@@ -50,14 +50,12 @@ public class BookingDeserializer extends StdDeserializer<Booking> {
         //Gets the startdate as a date
         String startDate = startDateNode.asText();
         LocalDate start = LocalDate.parse(startDate);
+        Booking.setStartDate(start);
         //Gets the endate as a date
         JsonNode endDateNode = node.get("endDate");
         String endDate = endDateNode.asText();
         LocalDate end = LocalDate.parse(endDate);
-        Booking.setDates(start, end);
-
-        String bookingId = node.get("bookingId").asText();
-        Booking.setBookingId(Integer.parseInt(bookingId));
+        Booking.setEndDate(end);
 
         return Booking;
     }

@@ -69,22 +69,22 @@ public class CalendarTest {
         });
     }
 
-    // @Test
-    // public void removeBookingTest() throws Exception {
-    //     bkn0.setBookedObject(itm);
-    //     bkn0.setDates(date, date.plusDays(2));
+    @Test
+    public void removeBookingTest() throws Exception {
+        bkn0.setBookedObject(itm);
+        bkn0.setDates(date, date.plusDays(2));
 
-    //     bkn1.setBookedObject(itm);
-    //     bkn1.setDates(date.plusDays(3), date.plusDays(5));
+        bkn1.setBookedObject(itm);
+        bkn1.setDates(date.plusDays(3), date.plusDays(5));
 
-    //     cal.addBooking(bkn0);
-    //     cal.addBooking(bkn1);
+        cal.addBooking(bkn0);
+        cal.addBooking(bkn1);
 
-    //     cal.removeBooking(0);
+        cal.removeBooking(0);
 
-    //     ArrayList<Booking> bookings = new ArrayList<Booking>();
-    //     bookings.add(bkn1);
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
+        bookings.add(bkn1);
 
-    //     Assertions.assertEquals(bookings, cal.getBookings());
-    // }
+        Assertions.assertEquals(bookings, cal.getBookings());
+    }
 }

@@ -31,7 +31,6 @@ public class BookingSerializer extends StdSerializer<Booking> {
     jsonGen.writeStringField("startDate", Booking.getStartDate().toString());
     //Writes the enddate
     jsonGen.writeStringField("endDate", Booking.getEndDate().toString());
-    jsonGen.writeStringField("bookingId", Integer.toString(Booking.getBookingId()));
     jsonGen.writeEndObject();
   }
 

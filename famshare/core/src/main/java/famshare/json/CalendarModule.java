@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import famshare.core.Booking;
 import famshare.core.Calendar;
 import famshare.core.Item;
-import famshare.core.ItemList;
 
 @SuppressWarnings("serial")
 public class CalendarModule extends SimpleModule {
@@ -21,8 +20,5 @@ public class CalendarModule extends SimpleModule {
 
         addSerializer(Item.class, new ItemSerializer());
         addDeserializer(Item.class, new ItemDeserializer());
-
-        addSerializer(ItemList.class, new ItemListSerializer());
-        addDeserializer(ItemList.class, new ItemListDeserializer());
     }
 }
