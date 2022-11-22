@@ -8,5 +8,8 @@ module famshare.core {
     
     exports famshare.core;
     exports famshare.jsoncore;
+
     opens famshare.core to com.google.gson, com.fasterxml.jackson.databind;
+    opens famshare.jsoncore to com.fasterxml.jackson.databind;
+
 }
