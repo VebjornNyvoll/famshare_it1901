@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import famshare.core.Booking;
 import famshare.core.Calendar;
 import famshare.core.Item;
+import famshare.core.ItemList;
 import famshare.core.User;
 
 public class CalendarDeserializer extends StdDeserializer<Calendar> {
@@ -29,6 +30,7 @@ public class CalendarDeserializer extends StdDeserializer<Calendar> {
         Calendar Calendar = new Calendar();
         ObjectCodec codec = parser.getCodec();
         JsonNode node = codec.readTree(parser);
+        ItemList itemList = new ItemList();
 
         //Gets the booking objects from json
         JsonNode bookingNode = node.get("calendar");
@@ -58,10 +60,10 @@ public class CalendarDeserializer extends StdDeserializer<Calendar> {
             String endDate = endDateNode.asText();
             LocalDate end = LocalDate.parse(endDate);
             b.setDates(start, end);
-
             // Gets the bookingId from json
             String bookingId = booking.get("bookingId").asText();
             b.setBookingId(Integer.parseInt(bookingId));
+            itemList.addItem(item);
             Calendar.addBooking(b);
         }
         return Calendar;

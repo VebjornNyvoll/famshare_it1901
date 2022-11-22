@@ -10,6 +10,7 @@ public class Calendar {
 
     public Calendar() {
         bookings = new ArrayList<>();
+        itemList = new ItemList();
     }
 
     public Booking getBooking(int id) {
@@ -75,4 +76,5 @@ public class Calendar {
     public void setItemList(ItemList itemList) {
         this.itemList = itemList;
     }
+
 }
