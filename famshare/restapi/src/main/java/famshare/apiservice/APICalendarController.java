@@ -1,54 +1,54 @@
 package famshare.apiservice;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.time.LocalDate;
-import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import famshare.apiservice.APICalendar;
+
 import famshare.core.Booking;
 import famshare.core.Calendar;
-import famshare.core.Item;
-import famshare.core.User;
-
 
 @RestController
+@RequestMapping(APICalendarController.CONTROLLER_PATH)
 public class APICalendarController {
-    private final AtomicLong counter = new AtomicLong();
 
-    @GetMapping("/calendar")
-    public Calendar calendar(@RequestParam(value = "name", defaultValue = "World") String name) {
-        APICalendar apiCalendar;
-        try {
-            apiCalendar = new APICalendar(counter.incrementAndGet(), "src/main/resources/calendar.json");
-            return apiCalendar.getCalendar();
-        } catch (IOException e) {
-            // TODO: Remove this, it's just for debugging
-            StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw));
-            String exceptionAsString = sw.toString();
-            Calendar testCalendar = new Calendar();
-            Item testItem = new Item();
-            testItem.setId(1);
-            testItem.setName(exceptionAsString);
-            testItem.setDescription("It really did!");
-            User testUser = new User();
-            testUser.setId(101);
-            testUser.setName("BROKE_IN_CONTROLLER");
-            Booking testBooking = new Booking();
-            testBooking.setBookedObject(testItem);
-            testBooking.setBooker(testUser);
-            testBooking.setBookingId(1001);
-            testBooking.setDates(LocalDate.now(), LocalDate.now().plusDays(1));
-            testCalendar.addBooking(testBooking);
-            return testCalendar;
-            // This is just to make clear what has gone wrong, when something has. Will be removed later.
-        }
-        
-    }
+  public static final String CONTROLLER_PATH = "/calendar";
+
+  private final APICalendarService APICalendar;
+
+  @Autowired
+  public APICalendarController(final APICalendarService APICalendar) {
+    this.APICalendar = APICalendar;
+  }
+
+  @GetMapping
+  protected Calendar getCalendar() throws IOException {
+    return APICalendar.getCalendar();
+  }
+
+  @PostMapping
+  protected boolean addBooking(@RequestBody Booking Booking) throws IOException {
+    APICalendar.addBooking(Booking);
+    return true;
+  }
+
+  //Get individual booking to /calendar/{id}
+  @GetMapping("/{id}")
+  protected Booking getBooking(@PathVariable("id") int id) throws IOException {
+    return APICalendar.getBooking(id);
+  }
+  
+
+  @DeleteMapping(path = "/{id}")
+  protected boolean removeBooking(@PathVariable("id") int id) throws IOException {
+    APICalendar.removeBooking(id);
+    return true;
+  }
 }
