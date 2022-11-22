@@ -50,12 +50,15 @@ public class BookingDeserializer extends StdDeserializer<Booking> {
         //Gets the startdate as a date
         String startDate = startDateNode.asText();
         LocalDate start = LocalDate.parse(startDate);
-        Booking.setStartDate(start);
         //Gets the endate as a date
         JsonNode endDateNode = node.get("endDate");
         String endDate = endDateNode.asText();
         LocalDate end = LocalDate.parse(endDate);
-        Booking.setEndDate(end);
+        Booking.setDates(start, end);
+
+        String bookingId = node.get("bookingId").asText();
+        Booking.setBookingId(Integer.parseInt(bookingId));
+       
 
         return Booking;
     }

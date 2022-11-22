@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import famshare.core.Booking;
 import famshare.core.Calendar;
@@ -35,11 +36,19 @@ public class APICalendarController {
     return APICalendar.getCalendar();
   }
 
-  @PostMapping
-  protected boolean addBooking(@RequestBody Booking Booking) throws IOException {
-    APICalendar.addBooking(Booking);
+  @PostMapping(consumes = "text/plain")
+  protected boolean addBooking(@RequestBody String bookingAsJsonString) throws IOException {
+    ObjectMapper objMapper = new ObjectMapper();
+    try {
+      Booking booking = objMapper.readValue(bookingAsJsonString, Booking.class);
+      APICalendar.addBooking(booking);
+    } catch (Exception e) {
+      System.out.println("Posted booking is on invalid format: " + e.getMessage() + " " + bookingAsJsonString);
+      return false;
+    }
     return true;
   }
+
 
   //Get individual booking to /calendar/{id}
   @GetMapping("/{id}")

@@ -86,11 +86,11 @@ public class FamController {
         setDummyItems();
         // Load calendar from file if there is one
         try {
-            calendar = persistance.readCalendar(filePath);  
+            calendar = httpCaller.getCalendarFromAPI();
             for (Booking b : calendar.getBookings()) {
                 nextBookingId++;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             calendar = new Calendar();
         }
         updateItemView();

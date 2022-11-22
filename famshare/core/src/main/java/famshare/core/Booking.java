@@ -107,7 +107,8 @@ public class Booking {
     @Override
     public String toString() {
         return bookedObject.getName() + "; " + booker.getName() + "; " + getStartDate() + " - "
-                + getEndDate();
+                + getEndDate() + " bookingId:" + bookingId;
     }
+
 
 }
