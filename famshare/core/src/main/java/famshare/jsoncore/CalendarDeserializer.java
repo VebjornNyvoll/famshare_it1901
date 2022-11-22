@@ -52,7 +52,7 @@ public class CalendarDeserializer extends StdDeserializer<Calendar> {
             Item item = new Item();
             item.setName(itemNode.get("name").asText());
             item.setDescription(itemNode.get("description").asText());
-            item.setId(itemNode.get("itemID").asInt());
+            item.setId(itemNode.get("id").asInt());
             b.setBookedObject(item);
             //Gets the startdate from json
             JsonNode startDateNode = booking.get("startDate");

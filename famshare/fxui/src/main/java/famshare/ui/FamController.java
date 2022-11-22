@@ -61,8 +61,11 @@ public class FamController {
     void initialize() throws IOException {
         // Load calendar from file if there is one
         try {
-            calendar = httpCaller.getCalendarFromAPI(); 
-        } catch (IOException e) {
+            calendar = httpCaller.getCalendarFromAPI();
+            for (Booking b : calendar.getBookings()) {
+                nextBookingId++;
+            }
+        } catch (Exception e) {
             calendar = new Calendar();
         }
         updateItemView();

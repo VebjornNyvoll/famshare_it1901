@@ -52,10 +52,10 @@ public class HTTPCaller {
                 .build();
         
                 try {
-                    
+                    System.out.println(new ObjectMapper().writeValueAsString(booking));
                     HttpRequest request = HttpRequest.newBuilder()
                     .POST(HttpRequest.BodyPublishers.ofString(new ObjectMapper().writeValueAsString(booking)))
-                    .header("Content-Type", "application/json") 
+                    .header("Content-Type", "text/plain")
                     .uri(URI.create(url))
                     .build();
                     HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
