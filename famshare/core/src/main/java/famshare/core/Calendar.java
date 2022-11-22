@@ -77,4 +77,10 @@ public class Calendar {
         this.itemList = itemList;
     }
 
+    
+    //Adds item to itemlist
+    public void addItem(Item item) {
+        itemList.addItem(item);
+    }
+
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import famshare.core.Booking;
 import famshare.core.Calendar;
+import famshare.core.Item;
 import famshare.core.ItemList;
 import famshare.json.*;
 
@@ -27,6 +28,13 @@ public class APICalendarService {
 
   protected boolean addBooking(Booking Booking) throws IOException {
     Calendar.addBooking(Booking);
+    persistence.writeCalendar(Calendar, filePath);
+    return true;
+  }
+
+  //Adds item to itemlist
+  protected boolean addItem(Item item) throws IOException {
+    Calendar.addItem(item);
     persistence.writeCalendar(Calendar, filePath);
     return true;
   }

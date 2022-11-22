@@ -16,7 +16,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import famshare.core.Booking;
 import famshare.core.Calendar;
-
 import famshare.core.ItemList;
 
 @RestController
@@ -43,12 +42,16 @@ public class APICalendarController {
     try {
       Booking booking = objMapper.readValue(bookingAsJsonString, Booking.class);
       APICalendar.addBooking(booking);
+      APICalendar.addItem(booking.getBookedObject());
     } catch (Exception e) {
       System.out.println("Posted booking is on invalid format: " + e.getMessage() + " " + bookingAsJsonString);
       return false;
     }
     return true;
   }
+  
+  
+
 
   @DeleteMapping(path = "/{id}")
   protected boolean removeBooking(@PathVariable("id") int id) throws IOException {
