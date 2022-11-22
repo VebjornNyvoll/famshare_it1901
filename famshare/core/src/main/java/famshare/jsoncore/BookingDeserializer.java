@@ -58,6 +58,7 @@ public class BookingDeserializer extends StdDeserializer<Booking> {
 
         String bookingId = node.get("bookingId").asText();
         Booking.setBookingId(Integer.parseInt(bookingId));
+       
 
         return Booking;
     }
