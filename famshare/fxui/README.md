@@ -1,13 +1,12 @@
 # fxui
-TODO
 
 **Fxui** contains the following classes: 
 
-- App.java 
+- App.java launches the program and sets up the stage.
 
-- FamController.java 
+- FamController.java is the controller for the FXML file. It contains all the methods for the buttons and other elements in the FXML file.
 
-Under **resources** you will find the FXML files used by the app, and a file with settings for savePaths, serverURI and which
+Under **resources** you will find the FXML files used by the app, and a file with settings for savePaths, serverURI.
 
 TODO
 ![Classdiagram]
