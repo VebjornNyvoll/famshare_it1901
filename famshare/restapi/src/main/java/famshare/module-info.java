@@ -1,8 +1,8 @@
 module famshare.apiservice {
     requires famshare.core;
+    requires famshare.json.simple;
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
-    requires json.simple;
     requires spring.web;
     requires spring.boot;
     requires spring.boot.autoconfigure;

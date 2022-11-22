@@ -98,20 +98,7 @@
 
 
 
-            
-    <dependency>
-                  
-      
-      <groupId>com.googlecode.json-simple</groupId>
-                  
-      
-      <artifactId>json-simple</artifactId>
-                  
-      
-      <version>1.1.1</version>
-              
-    
-    </dependency>
+     
           
   
   </dependencies>
@@ -311,10 +298,9 @@
   
   <modules>
           
-    
+    <module>json_simple</module>
     <module>core</module>
           
-    
     <module>fxui</module>
 
     <module>restapi</module>

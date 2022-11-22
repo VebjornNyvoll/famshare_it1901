@@ -61,14 +61,14 @@
 
 //     @Test
 //     public void testItemView_initial() {
-//         initial famshare items
+//         // initial famshare items
 //         final ListView<String> itemListView = lookup("#itemView").query();
 //         assertEquals(itemListView.getItems().size(), controller.getItemObjectList().size());
 //         assertEquals("Cabin", itemListView.getItems().get(0));
 //         assertEquals("Tool box", itemListView.getItems().get(5));
 //     }
 
-//     booking without dates; exception in UI
+//     // booking without dates; exception in UI
 //     @Test
 //     public void testBookWithoutDates() {
 //         final ListView<String> itemListView = lookup("#itemView").query();
@@ -90,7 +90,7 @@
 //         clickOn("#bookItemButton");
 //     }
 
-//     booking with dates
+//     // booking with dates
 //     @Test
 //     public void testBookWithDates() {
 //         final ListView<String> itemListView = lookup("#itemView").query();
