@@ -83,4 +83,10 @@ public class Calendar {
         itemList.addItem(item);
     }
 
+    //Checks if item is in itemlist
+    public boolean containsItem(Item item) {
+        return itemList.getItems().contains(item);
+    }
+
+
 }

@@ -50,12 +50,12 @@ public class HTTPCaller {
             item.setId(itemObj.getInt("id"));
             item.setDescription(itemObj.getString("description"));
             booking.setBookedObject(item);
-            calendar.addItem(item);
+            if(!calendar.containsItem(item)) {
+                calendar.addItem(item);
+            }
             calendar.addBooking(booking);
         }
-        
         return calendar;
-
     }
 
     public void postBookingToAPI(Booking booking){
