@@ -61,3 +61,13 @@ Brukeren har behov for å kunne booke flere redskaper og skrive hva de skal bruk
 
 ## Diagrammer
 
+### Sekvensdiagram
+
+Viser sekvensdiagram for booking av en gjenstand og fjerne gjenstand.
+
+![Sequencediagram](../docs/diagrams/SequenceDiagram.png)
+### Pakkediagram
+
+Viser pakkediagram for prosjektet.
+
+![PackageDiagram](../docs/diagrams/PackageDiagram.png)

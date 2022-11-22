@@ -1,0 +1,55 @@
+@startuml packagediagram
+folder famshare   {
+
+
+    component fxui  {
+        package famshare.fxui #FFFFCC{
+        }
+    }
+
+    component resources  {
+        component fxml {
+                
+        }
+    }
+    component restapi  {
+        package famshare.restapi #FFFFCC {
+
+        }
+    }
+
+    component core {
+        package famshare.core #FFFFCC{
+               
+        }
+        package famshare.json #FFFFCC{
+
+        }
+    }
+
+    component springboot {
+
+    }
+
+    component jackson {
+
+    }
+
+}
+
+famshare.fxui ..> fxml
+
+famshare.fxui ..> famshare.json
+famshare.fxui ..> famshare.core
+
+restapi .> springboot
+
+famshare.json ..> jackson
+
+famshare.restapi ..> famshare.json
+
+famshare.restapi ..> famshare.core
+
+famshare.fxui .> famshare.restapi
+
+@enduml
