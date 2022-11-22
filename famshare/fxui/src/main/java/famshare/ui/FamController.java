@@ -31,6 +31,7 @@ public class FamController {
     private User dummyUser = new User();
     private String filePath;
     private HTTPCaller httpCaller = new HTTPCaller();
+    private int nextBookingId = 0;
 
     public FamController() throws IOException {
         dummyUser.setName("Dummy User");
@@ -59,7 +60,11 @@ public class FamController {
     @FXML
     void initialize() throws IOException {
         // Load calendar from file if there is one
-        calendar = httpCaller.getCalendarFromAPI();
+        try {
+            calendar = httpCaller.getCalendarFromAPI(); 
+        } catch (IOException e) {
+            calendar = new Calendar();
+        }
         updateItemView();
         updateBookingView(); 
         updateBookingView(); 
@@ -124,14 +129,13 @@ public class FamController {
         for (Booking booking : calendar.getBookings()) {
             bookingView.getItems().add(booking.toString());
         }
-    }
-    @FXML
-    public void additem() throws IOException {
-        Item item = new Item();
-        item.setName(itemname.getText());
-        item.setId(calendar.getItemList().getItems().size() + 1);
-        calendar.addItem(item);
-        updateItemView();
+        // Adds bookings in bookingview to json file
+        // try {
+        //     persistance.writeCalendar(calendar, filePath);
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
+
     }
 
     @FXML
@@ -142,7 +146,8 @@ public class FamController {
             int i = itemView.getSelectionModel().getSelectedIndex();
             LocalDate startD = startDate.getValue();
             LocalDate endD = endDate.getValue();
-            Booking newBooking = new Booking(calendar.getItemList().getItems().get(i), dummyUser, startD, endD, 10);// temp dummy id
+            Booking newBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD, nextBookingId);
+            nextBookingId++;
             calendar.addBooking(newBooking);
             httpCaller.postBookingToAPI(newBooking);
             updateBookingView();
