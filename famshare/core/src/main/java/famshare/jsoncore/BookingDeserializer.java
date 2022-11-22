@@ -1,4 +1,4 @@
-package famshare.json;
+package famshare.jsoncore;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -58,6 +58,7 @@ public class BookingDeserializer extends StdDeserializer<Booking> {
 
         String bookingId = node.get("bookingId").asText();
         Booking.setBookingId(Integer.parseInt(bookingId));
+       
 
         return Booking;
     }

@@ -6,7 +6,7 @@ import famshare.core.Booking;
 import famshare.core.Calendar;
 import famshare.core.Item;
 import famshare.core.ItemList;
-import famshare.json.*;
+import famshare.jsoncore.*;
 
 import org.springframework.stereotype.Service;
 

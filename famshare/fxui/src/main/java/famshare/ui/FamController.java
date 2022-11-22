@@ -19,11 +19,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import famshare.core.Booking;
-import kong.unirest.GenericType;
-import kong.unirest.Unirest;
+
 
 import famshare.core.*;
-import famshare.json.*;
+import famshare.jsoncore.*;
+import famshare.jsoncore.*;
 
 public class FamController {
 
@@ -32,6 +32,7 @@ public class FamController {
     private User dummyUser = new User();
     private String filePath;
     private HTTPCaller httpCaller = new HTTPCaller();
+    private int nextBookingId = 0;
 
     public FamController() throws IOException {
         dummyUser.setName("Dummy User");
@@ -60,7 +61,14 @@ public class FamController {
     @FXML
     void initialize() throws IOException {
         // Load calendar from file if there is one
-        calendar = httpCaller.getCalendarFromAPI();
+        try {
+            calendar = httpCaller.getCalendarFromAPI();
+            for (Booking b : calendar.getBookings()) {
+                nextBookingId++;
+            }
+        } catch (Exception e) {
+            calendar = new Calendar();
+        }
         updateItemView();
         updateBookingView(); 
         updateBookingView(); 
@@ -125,25 +133,25 @@ public class FamController {
         for (Booking booking : calendar.getBookings()) {
             bookingView.getItems().add(booking.toString());
         }
-    }
-    @FXML
-    public void additem() throws IOException {
-        Item item = new Item();
-        item.setName(itemname.getText());
-        item.setId(calendar.getItemList().getItems().size() + 1);
-        calendar.addItem(item);
-        updateItemView();
+        // Adds bookings in bookingview to json file
+        // try {
+        //     persistance.writeCalendar(calendar, filePath);
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
+
     }
 
     @FXML
-    void book() {
+    public void book() {
         exceptionText.setText("");
 
         try {
             int i = itemView.getSelectionModel().getSelectedIndex();
             LocalDate startD = startDate.getValue();
             LocalDate endD = endDate.getValue();
-            Booking newBooking = new Booking(calendar.getItemList().getItems().get(i), dummyUser, startD, endD, 10);// temp dummy id
+            Booking newBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD, nextBookingId);
+            nextBookingId++;
             calendar.addBooking(newBooking);
             httpCaller.postBookingToAPI(newBooking);
             updateBookingView();
@@ -161,7 +169,7 @@ public class FamController {
             int bookingId = Integer.parseInt(bookingView.getItems().get(i).split("bookingId:")[1]);
             exceptionText.setText(i + " " + bookingId);
             calendar.removeBooking(bookingId);
-            httpCaller.deleteBooking(bookingId);
+            httpCaller.deleteBookingFromAPI(bookingId);
             updateBookingView();
         } catch (Exception e) {
             exceptionText.setText(e.getMessage());

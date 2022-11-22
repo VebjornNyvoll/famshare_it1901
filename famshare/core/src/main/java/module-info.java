@@ -1,11 +1,15 @@
 module famshare.core {
     requires transitive com.fasterxml.jackson.core;
     requires transitive com.fasterxml.jackson.databind;
+    requires java.net.http;
     requires famshare.json.simple;
-    requires transitive unirest.java;
+    
 
     
     exports famshare.core;
-    exports famshare.json;
-    opens famshare.core to com.google.gson;
+    exports famshare.jsoncore;
+
+    opens famshare.core to com.google.gson, com.fasterxml.jackson.databind;
+    opens famshare.jsoncore to com.fasterxml.jackson.databind;
+
 }
