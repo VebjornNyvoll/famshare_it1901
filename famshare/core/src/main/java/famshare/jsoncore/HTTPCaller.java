@@ -45,16 +45,17 @@ public class HTTPCaller {
     }
     
     public void postBookingToAPI(Booking booking) {
-        int bookingId = booking.getBookingId();
-        String url = "http://localhost:8081/calendar/" + bookingId;
+        String url = "http://localhost:8081/calendar/";
         HttpClient httpClient = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_2)
                 .connectTimeout(Duration.ofSeconds(10))
                 .build();
-
+        
                 try {
+                    
                     HttpRequest request = HttpRequest.newBuilder()
                     .POST(HttpRequest.BodyPublishers.ofString(new ObjectMapper().writeValueAsString(booking)))
+                    .header("Content-Type", "application/json") 
                     .uri(URI.create(url))
                     .build();
                     HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());

@@ -139,7 +139,7 @@ public class FamController {
     }
 
     @FXML
-    void book() {
+    public void book() {
         exceptionText.setText("");
 
         try {
