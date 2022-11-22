@@ -1,0 +1,30 @@
+@startuml
+
+group User add booking
+user -> fxui: click "add booking"
+fxui -> core: addBooking()
+core -> restapi: POST
+restapi -> server: Save to server
+
+restapi <-- server: Get from server
+core <-- restapi: response
+fxui <-- core: added
+fxui --> fxui: updateBookingView()
+user <-- fxui:
+end
+
+group User deletes booking
+user <- user: select booking in bookingview
+user -> fxui: click "remove booking"
+fxui -> core: removeBooking(id)
+core -> restapi: DELETE ID
+restapi -> server: remove from server
+
+restapi <-- server: deleted
+core <-- restapi: response
+fxui <-- core: removed
+fxui --> fxui: **updateBookingView()**
+user <-- fxui: Removed
+end
+
+@enduml
