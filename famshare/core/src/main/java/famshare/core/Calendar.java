@@ -6,13 +6,32 @@ public class Calendar {
     // Class responsible for holding booking objects and performing operations on
     // those objects.
     private ArrayList<Booking> bookings;
+    private ItemList itemList;
 
     public Calendar() {
         bookings = new ArrayList<>();
+        itemList = new ItemList();
+    }
+
+    public Booking getBooking(int id) {
+        // Returns a booking object with the given id.
+        for (Booking b : bookings) {
+            if (b.getBookingId() == id) {
+                return b;
+            }
+        }
+        return null;
     }
 
     public void removeBooking(int bookingId) {
-        bookings.remove(bookingId);
+        for (Booking booking : bookings) {
+            if(booking.getBookingId() == bookingId) {
+                System.out.println(booking);
+                bookings.remove(booking);
+                System.out.println(bookings);
+                return;
+            }
+        }
     }
 
     public void addBooking(Booking booking) {
@@ -47,13 +66,27 @@ public class Calendar {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "x";
+
+    //Gets itemlist from calendar
+    public ItemList getItemList() {
+        return this.itemList;
     }
 
-    public Booking getBooking(int id) {
-        return bookings.get(id);
+    //Sets itemlist in calendar
+    public void setItemList(ItemList itemList) {
+        this.itemList = itemList;
     }
+
+    
+    //Adds item to itemlist
+    public void addItem(Item item) {
+        itemList.addItem(item);
+    }
+
+    //Checks if item is in itemlist
+    public boolean containsItem(Item item) {
+        return itemList.getItems().contains(item);
+    }
+
 
 }
