@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import famshare.core.*;
-import famshare.json.*;
+import famshare.jsoncore.CalendarPersistance;
 
 public class FamController {
 
