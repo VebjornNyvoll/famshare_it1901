@@ -32,7 +32,6 @@ public class FamController {
     private User dummyUser = new User();
     private String filePath;
     private HTTPCaller httpCaller = new HTTPCaller();
-    private String calendarAsString = "your calendar is empty";
 
     public FamController() throws IOException {
         dummyUser.setName("Dummy User");
@@ -53,47 +52,10 @@ public class FamController {
     private Text exceptionText;
 
     @FXML
-    private Button bookButton, deleteButton;
+    private Button bookButton, deleteButton, addItemButton;
 
     @FXML
-    private TextField description;
-
-    @FXML
-    private TextField itemname;
-
-    @FXML
-    private Button addItemButton;
-
-    public void setDummyItems() { // will load itemView from external file later
-
-        Item cabin = new Item();
-        cabin.setName("Cabin");
-        cabin.setId(1);
-        Item car = new Item();
-        car.setName("Car");
-        car.setId(2);
-        Item boat = new Item();
-        boat.setName("Boat");
-        boat.setId(3);
-        Item drill = new Item();
-        drill.setName("Drill");
-        drill.setId(4);
-        Item bike = new Item();
-        bike.setName("Bike");
-        bike.setId(5);
-        Item toolBox = new Item();
-        toolBox.setName("Tool box");
-        toolBox.setId(6);
-        
-        ItemList itemList = new ItemList();
-        itemList.addItem(toolBox);
-        itemList.addItem(bike);
-        itemList.addItem(drill);
-        itemList.addItem(boat);
-        itemList.addItem(car);
-       
-       
-    }
+    private TextField description, itemname;
 
     @FXML
     void initialize() throws IOException {
