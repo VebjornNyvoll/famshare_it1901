@@ -6,6 +6,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import famshare.jsoncore.BookingDeserializer;
+import famshare.jsoncore.BookingSerializer;
+
+@JsonDeserialize(using = BookingDeserializer.class)
+@JsonSerialize(using = BookingSerializer.class)
 public class Booking {
     // Class responsible for holding start and end date of a booking, as well as
     // which user created said booking.

@@ -27,6 +27,7 @@ public class FamController {
     private String filePath = "src/main/resources/famshare/ui/calendar.json";
     private CalendarPersistance persistance = new CalendarPersistance();
     private int nextBookingId = 0;
+    private HTTPCaller httpCaller = new HTTPCaller();
    
 
     public FamController() throws IOException {
@@ -168,7 +169,7 @@ public class FamController {
     }
 
     @FXML
-    void book() {
+    public void book() {
         exceptionText.setText("");
 
         try {
@@ -178,10 +179,23 @@ public class FamController {
             Booking newBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD, nextBookingId);
             nextBookingId++;
             calendar.addBooking(newBooking);
-            HTTPCaller httpCaller = new HTTPCaller();
             httpCaller.postBookingToAPI(newBooking);
             updateBookingView();
             updateDisabledDates(itemObjectList.get(i).getName());
+        } catch (Exception e) {
+            exceptionText.setText(e.getMessage());
+        }
+    }
+
+    @FXML
+    public void delete() {
+        try {
+            int i = bookingView.getSelectionModel().getSelectedIndex();
+            int bookingId = Integer.parseInt(bookingView.getItems().get(i).split("bookingId:")[1]);
+            exceptionText.setText(i + " " + bookingId);
+            calendar.removeBooking(bookingId);
+            httpCaller.deleteBookingFromAPI(bookingId);
+            updateBookingView();
         } catch (Exception e) {
             exceptionText.setText(e.getMessage());
         }

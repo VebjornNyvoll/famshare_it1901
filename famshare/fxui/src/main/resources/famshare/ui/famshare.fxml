@@ -35,6 +35,7 @@
             <Image url="@famshare.png" />
          </image>
       </ImageView>
+      <Button fx:id="deleteButton" layoutX="14.0" layoutY="408.0" mnemonicParsing="false" onAction="#delete" style="-fx-background-color: red; -fx-font-size: 14; -fx-font-weight: bold;" text="Delete booking" />
    </children>
    <cursor>
       <Cursor fx:constant="DEFAULT" />
