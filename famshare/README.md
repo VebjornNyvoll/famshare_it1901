@@ -1,8 +1,25 @@
-# Brukerhistorier
+# Famshare
+
+## Struktur og Maven build
+
+Prosjektet er strukturert som en modulert Maven bygging. Modulene er: core som tar seg av domenelogikk og persistens. Fxui modulen håndterer brukerinteraksjon, og restapi gir en RESTful API for core modulen.
+
+## Oppstart
+
+Appen kan startes ved å kjøre følgende kommando i prosjektets rotmappe "famshare":
+
+- mvn install
+- mvn spring-boot:run -f restapi
+- mvn javafx:run -f fxui
+
+Teste kan kjøres ved:
+
+- mvn test
+## Brukerhistorier
 
 For å kunne se hvilke krav applikasjonen og systemet dekker eller eventuelt ikke dekker samler vi noen brukerhistorier i denne filen.
 
-## 1. Sommerferien skal planlegges
+### 1. Sommerferien skal planlegges
 
 I storfamilien har vi en hytte og en båt på deling. Før sommerferien blir det ofte diskusjoner om både helger og ukedager da det er mange som vil benytte seg av hytta og båten. Det kan fort bli kaotisk og vanskelig å planlegge.
 
@@ -22,7 +39,7 @@ Brukeren kan deretter velge hytta fra en liste over familiens gjenstander som ka
 - Booke tid på hytta
 - Skrive en kort beskrivelse av hvem som skal på hytta
 
-## 2. Verktøy til oppussingen
+### 2. Verktøy til oppussingen
 
 Jeg har nettopp kjøpt en bolig av typen oppussingsobjekt. For å spare penger skal jeg og faren min gjøre mye av jobben selv. Heldigvis er onkelen min snekker og svært handy, så han har mye verktøy og redskaper han gjerne kan låne ut når han ikke trenger det selv.
 
@@ -41,4 +58,6 @@ Brukeren har behov for å kunne booke flere redskaper og skrive hva de skal bruk
 ## Illustrasjon av tenkt fremtidig UI
 
 ![Illustrasjon](FamshareDemo.png)
+
+## Diagrammer
 
