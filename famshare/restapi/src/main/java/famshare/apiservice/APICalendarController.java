@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
+
 
 import famshare.core.Booking;
 import famshare.core.Calendar;
-import kong.unirest.json.JSONObject;
 
+import famshare.core.ItemList;
 
 @RestController
 @RequestMapping(APICalendarController.CONTROLLER_PATH)
@@ -62,5 +62,10 @@ public class APICalendarController {
   @GetMapping(path = "/{id}")
   protected Booking getBooking(@PathVariable("id") int id) throws IOException {
     return APICalendar.getCalendar().getBooking(id);
+  }
+  
+  @GetMapping(path = "/itemlist")
+  protected ItemList getItemList() throws IOException {
+    return APICalendar.getItemList();
   }
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import famshare.core.Booking;
 import famshare.core.Calendar;
+import famshare.core.ItemList;
 import famshare.json.*;
 
 import org.springframework.stereotype.Service;
@@ -34,6 +35,14 @@ public class APICalendarService {
     Calendar.removeBooking(id);
     persistence.writeCalendar(Calendar, filePath);
     return true;
+  }
+
+  protected Booking getBooking(int id) {
+    return Calendar.getBooking(id);
+  }
+
+  protected ItemList getItemList() {
+    return Calendar.getItemList();
   }
 }
 
