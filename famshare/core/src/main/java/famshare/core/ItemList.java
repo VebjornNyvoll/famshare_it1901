@@ -8,31 +8,8 @@ public class ItemList {
     private ArrayList<Item> items;
 
     public ItemList() {
-        items = new ArrayList<>();
-        Item cabin = new Item();
-        cabin.setName("Cabin");
-        cabin.setId(1);
-        Item car = new Item();
-        car.setName("Car");
-        car.setId(2);
-        Item boat = new Item();
-        boat.setName("Boat");
-        boat.setId(3);
-        Item drill = new Item();
-        drill.setName("Drill");
-        drill.setId(4);
-        Item bike = new Item();
-        bike.setName("Bike");
-        bike.setId(5);
-        Item toolBox = new Item();
-        toolBox.setName("Tool box");
-        toolBox.setId(6);
-        items.add(toolBox);
-        items.add(bike);
-        items.add(drill);
-        items.add(boat);
-        items.add(car);
-        items.add(cabin);
+        items = new ArrayList<Item>();
+        
     }
 
     public void addItem(Item item) {

@@ -29,7 +29,6 @@ public class FamController {
 
     
     private Calendar calendar;
-    private ItemList itemList = new ItemList();
     private User dummyUser = new User();
     private String filePath;
     private HTTPCaller httpCaller = new HTTPCaller();
@@ -43,9 +42,6 @@ public class FamController {
         return calendar;
     }
 
-    public ItemList getItemObjectList() {
-        return itemList;
-    }
 
     @FXML
     private ListView<String> bookingView, itemView;
@@ -157,7 +153,7 @@ public class FamController {
 
     public void updateItemView() {
         itemView.getItems().clear();
-        for (Item item : itemList.getItems()) {
+        for (Item item : calendar.getItemList().getItems()) {
             itemView.getItems().add(item.getName());
         }
     }
@@ -172,7 +168,8 @@ public class FamController {
     public void additem() throws IOException {
         Item item = new Item();
         item.setName(itemname.getText());
-        itemList.addItem(item);
+        item.setId(calendar.getItemList().getItems().size() + 1);
+        calendar.addItem(item);
         updateItemView();
     }
 
@@ -184,11 +181,12 @@ public class FamController {
             int i = itemView.getSelectionModel().getSelectedIndex();
             LocalDate startD = startDate.getValue();
             LocalDate endD = endDate.getValue();
-            Booking newBooking = new Booking(itemList.get(i), dummyUser, startD, endD, 10);// temp dummy id
+            Booking newBooking = new Booking(calendar.getItemList().getItems().get(i), dummyUser, startD, endD, 10);// temp dummy id
             calendar.addBooking(newBooking);
             httpCaller.postBookingToAPI(newBooking);
             updateBookingView();
-            updateDisabledDates(itemList.get(i).getName());
+            updateItemView();
+            updateDisabledDates(itemView.getSelectionModel().getSelectedItem());
         } catch (Exception e) {
             exceptionText.setText(e.getMessage());
         }

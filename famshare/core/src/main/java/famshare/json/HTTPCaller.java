@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import famshare.core.Booking;
 import famshare.core.Calendar;
 import famshare.core.Item;
+import famshare.core.ItemList;
 import famshare.core.User;
 import kong.unirest.Unirest;
 import kong.unirest.json.JSONArray;
@@ -49,9 +50,10 @@ public class HTTPCaller {
             item.setId(itemObj.getInt("id"));
             item.setDescription(itemObj.getString("description"));
             booking.setBookedObject(item);
-
+            calendar.addItem(item);
             calendar.addBooking(booking);
         }
+        
         return calendar;
 
     }
@@ -70,6 +72,8 @@ public class HTTPCaller {
             .asJson();
         }
     }
+
+    //Post item
 
     public String getStringFromAPI(){
         return Unirest.get("http://localhost:8081/testfunction")
