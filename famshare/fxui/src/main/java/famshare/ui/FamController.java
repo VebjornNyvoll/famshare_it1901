@@ -23,7 +23,6 @@ import famshare.core.Booking;
 
 import famshare.core.*;
 import famshare.jsoncore.*;
-import famshare.jsoncore.*;
 
 public class FamController {
 
@@ -150,7 +149,7 @@ public class FamController {
             int i = itemView.getSelectionModel().getSelectedIndex();
             LocalDate startD = startDate.getValue();
             LocalDate endD = endDate.getValue();
-            Booking newBooking = new Booking(itemObjectList.get(i), dummyUser, startD, endD, nextBookingId);
+            Booking newBooking = new Booking(calendar.getItemList().get(i), dummyUser, startD, endD, nextBookingId);
             nextBookingId++;
             calendar.addBooking(newBooking);
             httpCaller.postBookingToAPI(newBooking);
